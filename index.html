@@ -36,7 +36,7 @@
         .btn-glow {
             transition: all 0.2s ease-in-out;
         }
-        .btn-glow:hover {
+        .btn-glow:hover:not(:disabled) {
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
         }
         .turn-highlight {
@@ -443,11 +443,9 @@
 
                     if (newStatus === 'fighting' && globalState.userId === globalState.gameData.hostId) {
                         const { arenaState } = globalState.gameData;
-                        if (arenaState.status === 'selecting_fighters') {
-                            handleCPUFighterSelection();
-                            if (Object.keys(arenaState.currentFighters).length === arenaState.fightingTeams.length) {
-                                startTheFight();
-                            }
+                        if (arenaState.status === 'selecting_fighters' && Object.keys(arenaState.currentFighters).length < arenaState.fightingTeams.length) handleCPUFighterSelection();
+                        else if (arenaState.status === 'selecting_fighters' && Object.keys(arenaState.currentFighters).length === arenaState.fightingTeams.length) {
+                            startTheFight();
                         }
                         else if (arenaState.status === 'fighting_dice') {
                             if (arenaState.diceRolls && Object.values(arenaState.diceRolls).every(v => v !== null)) {
