@@ -839,7 +839,7 @@
             const losers = Object.values(players).filter(p => p.eliminated).sort((a, b) => b.eliminatedInRound - a.eliminatedInRound);
             const teamRanking = winner ? [winner, ...losers] : losers;
 
-            const survivors = winner ? winner.characters.map(charObj => {
+            const survivors = winner ? winner.characters.filter(c => c.status === 'active').map(charObj => {
                 const charData = charactersDB.find(c => c.id === charObj.id);
                 return { ...charData, team: winner };
             }).slice(0, 10) : [];
