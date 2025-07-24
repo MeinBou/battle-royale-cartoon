@@ -29,6 +29,10 @@
             filter: grayscale(100%) brightness(0.5);
             cursor: not-allowed;
         }
+        .character-icon.defeated {
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
         .btn-glow {
             transition: all 0.2s ease-in-out;
         }
@@ -106,7 +110,6 @@
         import { getFirestore, doc, getDoc, setDoc, onSnapshot, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- CONFIGURAZIONE FIREBASE ---
-        // Your web app's Firebase configuration
         const firebaseConfig = {
           apiKey: "AIzaSyDrBs4Yjc_76_1AdHm51Tlib5PaktoMxjw",
           authDomain: "battle-royale-cartoon.firebaseapp.com",
@@ -116,7 +119,7 @@
           appId: "1:1078110088589:web:9ddb41a59979e094bbe1c4",
           measurementId: "G-CD1D1Z3Z6J"
         };
-        const appId = "battle-royale-cartoon"; // Usiamo il projectId come ID per il path
+        const appId = "battle-royale-cartoon";
 
         // Inizializzazione di Firebase
         const app = initializeApp(firebaseConfig);
@@ -127,36 +130,36 @@
         const charactersDB = [
             { id: 1, name: "Son Goku", img: "https://i.pinimg.com/1200x/37/5c/2f/375c2fd286cdc41c06764f91f708a687.jpg", stats: { hp: 100, atk: 12, def: 8, spd: 10 }, moves: [{name: "Kamehameha", power: 1.2, description: "Un potente raggio di energia."}, {name: "Kaioken", power: 1.5, description: "Aumenta la potenza, ma è rischioso."}, {name: "Sfera Genkidama", power: 2.0, description: "Un attacco devastante che richiede tempo."}] },
             { id: 2, name: "Androide 18", img: "https://i.pinimg.com/736x/4c/68/ff/4c68ffd02e2220ec0b92f169f95d2e9f.jpg", stats: { hp: 90, atk: 10, def: 9, spd: 9 }, moves: [{name: "Infinity Bullet", power: 1.1, description: "Una raffica di colpi energetici."}, {name: "Power Blitz", power: 1.4, description: "Un'onda di energia concentrata."}, {name: "Barriera Energetica", power: 0, effect: 'def_up', description: "Aumenta la propria difesa."}] },
-            { id: 3, name: "Carlos Oliveira", img: "https://i.pinimg.com/736x/9c/d7/61/9cd7611ff4aaceecd802b75a2d2ad1f6.jpg", stats: { hp: 85, atk: 9, def: 7, spd: 7 }, moves: [{name: "Raffica di Fucile", power: 1.3, description: "Una serie di colpi precisi."}, {name: "Gancio Letale", power: 1.1, description: "Un attacco corpo a corpo."}, {name: "Kit Medico", power: 0, effect: 'heal', description: "Recupera una piccola quantità di HP."}] },
+            { id: 3, name: "Carlos Oliveira", img: "https://i.pinimg.com/736x/9c/d7/61/9cd7611ff4aaceecd802b75a2d2ad1f6.jpg", stats: { hp: 85, atk: 9, def: 7, spd: 7 }, moves: [{name: "Raffica di Fucile", power: 1.3, description: "Una serie di colpi precisi."}, {name: "Gancio Letale", power: 1.1, description: "Un attacco corpo a corpo."}, {name: "Kit Medico", power: 0, effect: 'heal', healAmount: [10, 15], description: "Recupera una piccola quantità di HP."}] },
             { id: 4, name: "Leon Kennedy", img: "https://i.pinimg.com/736x/0a/27/cd/0a27cd44aae181df0884d85bf18d0574.jpg", stats: { hp: 88, atk: 9, def: 8, spd: 8 }, moves: [{name: "Colpo di Pistola", power: 1.1, description: "Un colpo mirato e veloce."}, {name: "Calcio Rotante", power: 1.3, description: "Un attacco fisico che può sbilanciare."}, {name: "Schivata Esperta", power: 0, effect: 'spd_up', description: "Aumenta la propria velocità."}] },
             { id: 5, name: "Finn", img: "https://i.pinimg.com/736x/29/83/75/298375aacfcc94f3310fad5578000f6d.jpg", stats: { hp: 80, atk: 8, def: 7, spd: 9 }, moves: [{name: "Colpo di Spada", power: 1.2, description: "Un fendente con la sua fidata spada."}, {name: "Urlo Eroico", power: 1.0, effect: 'atk_up', description: "Aumenta il proprio attacco."}, {name: "Avventura!", power: 1.4, description: "Un attacco imprevedibile e potente."}] },
             { id: 6, name: "Jake", img: "https://i.pinimg.com/736x/cb/96/5a/cb965ab6c13eaf52f182474b6fc9a7d1.jpg", stats: { hp: 95, atk: 7, def: 10, spd: 5 }, moves: [{name: "Pugno Gigante", power: 1.5, description: "Trasforma il pugno per un colpo devastante."}, {name: "Mutaforma", power: 0, effect: 'def_up', description: "Altera il corpo per aumentare la difesa."}, {name: "Scudo Corporeo", power: 0, effect: 'def_up', description: "Diventa quasi impenetrabile per un turno."}] },
             { id: 7, name: "Marceline", img: "https://i.pinimg.com/736x/bb/93/5e/bb935e39f2d66248b6e4178227bdb233.jpg", stats: { hp: 85, atk: 10, def: 7, spd: 10 }, moves: [{name: "Assolo di Basso", power: 1.3, description: "Un'onda sonica che danneggia."}, {name: "Morso Vampirico", power: 1.2, effect: 'lifesteal', description: "Attacca e recupera parte del danno come HP."}, {name: "Invisibilità", power: 0, effect: 'evade', description: "Diventa invisibile per schivare il prossimo attacco."}] },
-            { id: 8, name: "Steven", img: "https://i.pinimg.com/736x/1c/3c/83/1c3c83c96596d34adda0c0d9f23d34e8.jpg", stats: { hp: 90, atk: 7, def: 11, spd: 6 }, moves: [{name: "Scudo di Quarzo", power: 0.8, description: "Lancia il suo scudo contro il nemico."}, {name: "Bolla Protettiva", power: 0, effect: 'def_up', description: "Crea una bolla che aumenta la difesa."}, {name: "Saliva Curativa", power: 0, effect: 'heal', description: "Usa i suoi poteri per curare le ferite."}] },
+            { id: 8, name: "Steven", img: "https://i.pinimg.com/736x/1c/3c/83/1c3c83c96596d34adda0c0d9f23d34e8.jpg", stats: { hp: 90, atk: 7, def: 11, spd: 6 }, moves: [{name: "Scudo di Quarzo", power: 0.8, description: "Lancia il suo scudo contro il nemico."}, {name: "Bolla Protettiva", power: 0, effect: 'def_up', description: "Crea una bolla che aumenta la difesa."}, {name: "Saliva Curativa", power: 0, effect: 'heal', healAmount: [15, 20], description: "Usa i suoi poteri per curare le ferite."}] },
             { id: 9, name: "Lapis", img: "https://i.pinimg.com/1200x/09/fb/12/09fb12467957da96913fc8f75e6f6356.jpg", stats: { hp: 88, atk: 11, def: 6, spd: 9 }, moves: [{name: "Idrocinesi", power: 1.4, description: "Manipola l'acqua per un attacco potente."}, {name: "Ali d'Acqua", power: 1.1, description: "Un attacco rapido usando ali d'acqua."}, {name: "Prigione Acquatica", power: 1.0, effect: 'stun', description: "Intrappola il nemico per un turno."}] },
             { id: 10, name: "Garnet", img: "https://i.pinimg.com/736x/65/9b/d2/659bd260c80c7ecb1e2c1d7c7c3e9508.jpg", stats: { hp: 95, atk: 11, def: 9, spd: 7 }, moves: [{name: "Guanti-Razzo", power: 1.4, description: "Scaglia i suoi guanti con forza esplosiva."}, {name: "Visione Futura", power: 0, effect: 'evade', description: "Prevede e schiva il prossimo attacco."}, {name: "Elettrocinesi", power: 1.2, description: "Scatena una scarica elettrica."}] },
             { id: 11, name: "Perla", img: "https://i.pinimg.com/736x/7b/2e/b7/7b2eb73a3f511efa5bc182d1db60191b.jpg", stats: { hp: 80, atk: 9, def: 7, spd: 11 }, moves: [{name: "Colpo di Lancia", power: 1.2, description: "Un affondo preciso e veloce."}, {name: "Ologramma", power: 0.8, description: "Crea un ologramma per confondere e attaccare."}, {name: "Parata Perfetta", power: 0, effect: 'def_up', description: "Aumenta drasticamente la difesa per un turno."}] },
             { id: 12, name: "Spongebob", img: "https://i.pinimg.com/736x/08/9d/56/089d562f45d59b2f7e37e643a5ebf927.jpg", stats: { hp: 75, atk: 8, def: 6, spd: 8 }, moves: [{name: "Soffio di Bolle", power: 1.0, description: "Soffia bolle che infastidiscono e danneggiano."}, {name: "Colpo di Spatola", power: 1.2, description: "Un colpo deciso con la sua fida spatola."}, {name: "Risata Irritante", power: 0.5, effect: 'def_down', description: "Infastidisce il nemico riducendone la difesa."}] },
-            { id: 13, name: "Patrick Stella", img: "https://i.pinimg.com/1200x/27/e0/2e/27e02eadbe6a321a7d0a9641a394c811.jpg", stats: { hp: 90, atk: 9, def: 8, spd: 3 }, moves: [{name: "Testata", power: 1.4, description: "Una potente testata."}, {name: "Lancio della Roccia", power: 1.6, description: "Solleva e lancia la sua casa-roccia."}, {name: "Dormita Rigenerante", power: 0, effect: 'heal', description: "Si addormenta per recuperare HP."}] },
+            { id: 13, name: "Patrick Stella", img: "https://i.pinimg.com/1200x/27/e0/2e/27e02eadbe6a321a7d0a9641a394c811.jpg", stats: { hp: 90, atk: 9, def: 8, spd: 3 }, moves: [{name: "Testata", power: 1.4, description: "Una potente testata."}, {name: "Lancio della Roccia", power: 1.6, description: "Solleva e lancia la sua casa-roccia."}, {name: "Dormita Rigenerante", power: 0, effect: 'heal', healAmount: [20, 25], description: "Si addormenta per recuperare HP."}] },
             { id: 14, name: "Sandy", img: "https://i.pinimg.com/736x/0a/aa/e9/0aaae99134d01ff0a173ef47eb6b08bf.jpg", stats: { hp: 82, atk: 10, def: 7, spd: 9 }, moves: [{name: "Karate Chop", power: 1.3, description: "Un colpo di karate fulmineo."}, {name: "Lazo Texano", power: 1.1, description: "Cattura e sbatte il nemico."}, {name: "Invenzione Geniale", power: 0, effect: 'atk_up', description: "Usa una delle sue invenzioni per potenziarsi."}] },
-            { id: 15, name: "Mario", img: "https://i.pinimg.com/736x/61/62/b5/6162b56bc61a4050bb34d7203e03642d.jpg", stats: { hp: 85, atk: 9, def: 8, spd: 8 }, moves: [{name: "Salto a Terra", power: 1.2, description: "Il suo classico e potente pestone."}, {name: "Palla di Fuoco", power: 1.3, description: "Lancia una palla di fuoco che rimbalza."}, {name: "Super Fungo", power: 0, effect: 'heal', description: "Mangia un fungo per recuperare salute."}] },
+            { id: 15, name: "Mario", img: "https://i.pinimg.com/736x/61/62/b5/6162b56bc61a4050bb34d7203e03642d.jpg", stats: { hp: 85, atk: 9, def: 8, spd: 8 }, moves: [{name: "Salto a Terra", power: 1.2, description: "Il suo classico e potente pestone."}, {name: "Palla di Fuoco", power: 1.3, description: "Lancia una palla di fuoco che rimbalza."}, {name: "Super Fungo", power: 0, effect: 'heal', healAmount: [20, 20], description: "Mangia un fungo per recuperare salute."}] },
             { id: 16, name: "Luigi", img: "https://i.pinimg.com/1200x/0b/49/30/0b49308522463829166e76b0d914c8b8.jpg", stats: { hp: 82, atk: 8, def: 7, spd: 9 }, moves: [{name: "Pugno Verde", power: 1.2, description: "Un pugno caricato di energia verde."}, {name: "Salto Svitato", power: 1.1, description: "Un salto goffo ma efficace."}, {name: "Poltergust", power: 1.0, effect: 'def_down', description: "Aspira le difese del nemico."}] },
             { id: 17, name: "Rosalinda", img: "https://i.pinimg.com/736x/09/14/f0/0914f029e712e92de9d4f0081a5da032.jpg", stats: { hp: 88, atk: 10, def: 8, spd: 8 }, moves: [{name: "Lancio Sfavillotto", power: 1.3, description: "Lancia uno dei suoi Sfavillotti."}, {name: "Scudo Cosmico", power: 0, effect: 'def_up', description: "Crea uno scudo di stelle."}, {name: "Onda Gravitazionale", power: 1.2, description: "Altera la gravità per danneggiare."}] },
             { id: 18, name: "Bowser", img: "https://i.pinimg.com/1200x/cf/3f/ec/cf3fec1f6b9334e0255065f150fa97a9.jpg", stats: { hp: 110, atk: 12, def: 11, spd: 4 }, moves: [{name: "Alito di Fuoco", power: 1.4, description: "Una fiammata continua e potente."}, {name: "Guscio Rotante", power: 1.2, description: "Si ritira nel guscio e carica."}, {name: "Pugno Possente", power: 1.3, description: "Un pugno brutale e diretto."}] },
             { id: 19, name: "Barbie", img: "https://i.pinimg.com/1200x/bd/e7/29/bde7296be641d72842be35b84065b48f.jpg", stats: { hp: 78, atk: 7, def: 7, spd: 9 }, moves: [{name: "Cambio d'Abito", power: 0, effect: 'stat_up', description: "Cambia stile per aumentare le statistiche."}, {name: "Discorso Ispiratore", power: 0, effect: 'team_atk_up', description: "Ispira la squadra aumentando l'attacco."}, {name: "Attacco Scintillante", power: 1.1, description: "Un attacco abbagliante."}] },
-            { id: 20, name: "Bloom", img: "https://i.pinimg.com/736x/2a/0e/3d/2a0e3d2c81ef601a4dc4647fe888b1a0.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 9 }, moves: [{name: "Fiamma del Drago", power: 1.5, description: "Il potere supremo della Fiamma del Drago."}, {name: "Scudo del Drago", power: 0, effect: 'def_up', description: "Uno scudo di fuoco invalicabile."}, {name: "Essenza Vitale", power: 0, effect: 'heal', description: "Cura le ferite con l'energia vitale."}] },
+            { id: 20, name: "Bloom", img: "https://i.pinimg.com/736x/2a/0e/3d/2a0e3d2c81ef601a4dc4647fe888b1a0.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 9 }, moves: [{name: "Fiamma del Drago", power: 1.5, description: "Il potere supremo della Fiamma del Drago."}, {name: "Scudo del Drago", power: 0, effect: 'def_up', description: "Uno scudo di fuoco invalicabile."}, {name: "Essenza Vitale", power: 0, effect: 'heal', healAmount: [15, 20], description: "Cura le ferite con l'energia vitale."}] },
             { id: 21, name: "Tecna", img: "https://i.pinimg.com/736x/dc/49/57/dc4957e6dc92728174b830bf39e8f70c.jpg", stats: { hp: 85, atk: 9, def: 9, spd: 10 }, moves: [{name: "Firewall", power: 0, effect: 'def_up', description: "Un muro digitale che aumenta la difesa."}, {name: "Raggio Digitale", power: 1.3, description: "Un raggio di pura energia tecnologica."}, {name: "Tecno-Trappola", power: 1.1, effect: 'stun', description: "Una trappola che blocca il nemico."}] },
             { id: 22, name: "Robin", img: "https://i.pinimg.com/736x/e7/3e/e2/e73ee222f16116892d37961f6ccf511a.jpg", stats: { hp: 85, atk: 9, def: 8, spd: 10 }, moves: [{name: "Lancio Batarang", power: 1.2, description: "Lancia uno dei suoi gadget iconici."}, {name: "Bastone da Combattimento", power: 1.3, description: "Una serie di colpi rapidi col bastone."}, {name: "Strategia Tattica", power: 0, effect: 'atk_up', description: "Analizza il nemico e aumenta il proprio attacco."}] },
             { id: 23, name: "Corvina", img: "https://i.pinimg.com/736x/fc/e3/30/fce330b50ce9cbf53287e441be15d597.jpg", stats: { hp: 88, atk: 11, def: 7, spd: 8 }, moves: [{name: "Azarath Metrion Zinthos", power: 1.6, description: "Scatena la sua potente magia oscura."}, {name: "Scudo Oscuro", power: 0, effect: 'def_up', description: "Crea uno scudo di energia oscura."}, {name: "Levitazione", power: 0, effect: 'evade', description: "Levita per schivare il prossimo colpo."}] },
             { id: 24, name: "Stellarubia", img: "https://i.pinimg.com/1200x/53/12/37/53123757cb3c81231a2b4fe641a2fac3.jpg", stats: { hp: 92, atk: 10, def: 8, spd: 9 }, moves: [{name: "Starbolt", power: 1.4, description: "Lancia potenti proiettili di energia."}, {name: "Volo Super Sonico", power: 1.1, description: "Carica il nemico a velocità supersonica."}, {name: "Forza Tamaraneana", power: 1.3, description: "Un colpo che sfrutta la sua forza aliena."}] },
-            { id: 25, name: "Cyborg", img: "https://i.pinimg.com/736x/bc/ef/b9/bcefb901b8a25aaf2716e142e9cf89a9.jpg", stats: { hp: 95, atk: 11, def: 10, spd: 6 }, moves: [{name: "Cannone Sonico", power: 1.5, description: "Spara un'onda sonica devastante."}, {name: "Pugno-Razzo", power: 1.3, description: "Lancia il suo pugno come un proiettile."}, {name: "Riparazione Automatica", power: 0, effect: 'heal', description: "Attiva i protocolli di auto-riparazione."}] },
-            { id: 26, name: "Bibble", img: "https://i.pinimg.com/736x/1a/6c/36/1a6c36366a180e9020be2d09ce085945.jpg", stats: { hp: 70, atk: 5, def: 5, spd: 10 }, moves: [{name: "Squittio Acuto", power: 0.8, effect: 'def_down', description: "Un verso che abbassa la difesa nemica."}, {name: "Volo Svolazzante", power: 0, effect: 'evade', description: "Vola in modo confuso per schivare."}, {name: "Confusione", power: 0, effect: 'stun', description: "Confondi il nemico con la tua dolcezza."}] },
+            { id: 25, name: "Cyborg", img: "https://i.pinimg.com/736x/bc/ef/b9/bcefb901b8a25aaf2716e142e9cf89a9.jpg", stats: { hp: 95, atk: 11, def: 10, spd: 6 }, moves: [{name: "Cannone Sonico", power: 1.5, description: "Spara un'onda sonica devastante."}, {name: "Pugno-Razzo", power: 1.3, description: "Lancia il suo pugno come un proiettile."}, {name: "Riparazione Automatica", power: 0, effect: 'heal', healAmount: [10, 20], description: "Attiva i protocolli di auto-riparazione."}] },
+            { id: 26, name: "Johnny Bravo", img: "https://i.pinimg.com/736x/b4/cd/95/b4cd959a9bb7efaf289ba3e4ae85d4b8.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 5 }, moves: [{name: "Posa Plastica", power: 0, effect: 'atk_up', description: "Fa una posa che aumenta il suo attacco."}, {name: "Hey, Pupa!", power: 1.2, description: "Un tentativo di approccio che confonde e danneggia."}, {name: "Karate Chop!", power: 1.4, description: "Un colpo di karate veloce e potente."}] },
             { id: 27, name: "Gumball", img: "https://i.pinimg.com/736x/af/61/0f/af610f55e819f4bd3f37e5001a2b19ee.jpg", stats: { hp: 78, atk: 8, def: 6, spd: 9 }, moves: [{name: "Piano Strampalato", power: 1.1, description: "Un piano che, stranamente, funziona."}, {name: "Fuga Veloce", power: 0, effect: 'evade', description: "Scappa a gambe levate."}, {name: "Sarcasmo Tagliente", power: 0.9, effect: 'def_down', description: "Ferisce l'orgoglio e la difesa del nemico."}] },
             { id: 28, name: "Nicole Watterson", img: "https://i.pinimg.com/736x/81/24/e4/8124e43da43e1d06dcdbca15f22a0cd9.jpg", stats: { hp: 90, atk: 12, def: 8, spd: 11 }, moves: [{name: "Furia Cieca", power: 1.6, description: "Scatena una rabbia incontenibile."}, {name: "Sguardo Assassino", power: 1.2, effect: 'def_down', description: "Uno sguardo che terrorizza e indebolisce."}, {name: "Super Velocità", power: 1.3, description: "Si muove così velocemente da essere quasi invisibile."}] },
-            { id: 29, name: "Darwin Watterson", img: "https://i.pinimg.com/736x/44/ad/5f/44ad5f25f6dae6e19757b15346684583.jpg", stats: { hp: 80, atk: 7, def: 7, spd: 8 }, moves: [{name: "Getto d'Acqua", power: 1.1, description: "Sputa un getto d'acqua."}, {name: "Consiglio Sincero", power: 0, effect: 'heal', description: "La sua sincerità cura le ferite... emotive."}, {name: "Lealtà Incrollabile", power: 0, effect: 'def_up', description: "La sua lealtà lo rende più resistente."}] },
+            { id: 29, name: "Darwin Watterson", img: "https://i.pinimg.com/736x/44/ad/5f/44ad5f25f6dae6e19757b15346684583.jpg", stats: { hp: 80, atk: 7, def: 7, spd: 8 }, moves: [{name: "Getto d'Acqua", power: 1.1, description: "Sputa un getto d'acqua."}, {name: "Consiglio Sincero", power: 0, effect: 'heal', healAmount: [5, 10], description: "La sua sincerità cura le ferite... emotive."}, {name: "Lealtà Incrollabile", power: 0, effect: 'def_up', description: "La sua lealtà lo rende più resistente."}] },
             { id: 30, name: "Robot Boy", img: "https://i.pinimg.com/736x/4d/15/56/4d1556d8ad55d90c868d0c6ba5642ffe.jpg", stats: { hp: 95, atk: 11, def: 10, spd: 9 }, moves: [{name: "Super Attivazione", power: 1.5, description: "Si trasforma per un attacco devastante."}, {name: "Raggio Laser", power: 1.3, description: "Spara un laser dai suoi occhi."}, {name: "Scudo Energetico", power: 0, effect: 'def_up', description: "Crea uno scudo protettivo."}] },
             { id: 31, name: "Sonic", img: "https://i.pinimg.com/736x/b2/e8/3a/b2e83aa2b39347d771851f394b53737f.jpg", stats: { hp: 85, atk: 9, def: 7, spd: 13 }, moves: [{name: "Spin Dash", power: 1.2, description: "Si appallottola e carica a grande velocità."}, {name: "Homing Attack", power: 1.3, description: "Un attacco a ricerca che non manca mai il bersaglio."}, {name: "Boost Sonico", power: 1.1, effect: 'spd_up', description: "Supera la barriera del suono per attaccare."}] },
-            { id: 32, name: "Orso Bianco", img: "https://i.pinimg.com/736x/9c/36/59/9c3659e69419f16abe572e4241667bcd.jpg", stats: { hp: 90, atk: 10, def: 9, spd: 7 }, moves: [{name: "Colpo d'Ascia", power: 1.3, description: "Un colpo preciso e letale con la sua ascia."}, {name: "Arte Marziale", power: 1.4, description: "Una serie di colpi da maestro di arti marziali."}, {name: "Cucina Curativa", power: 0, effect: 'heal', description: "Prepara un piatto che rigenera la salute."}] },
+            { id: 32, name: "Orso Bianco", img: "https://i.pinimg.com/736x/9c/36/59/9c3659e69419f16abe572e4241667bcd.jpg", stats: { hp: 90, atk: 10, def: 9, spd: 7 }, moves: [{name: "Colpo d'Ascia", power: 1.3, description: "Un colpo preciso e letale con la sua ascia."}, {name: "Arte Marziale", power: 1.4, description: "Una serie di colpi da maestro di arti marziali."}, {name: "Cucina Curativa", power: 0, effect: 'heal', healAmount: [10, 15], description: "Prepara un piatto che rigenera la salute."}] },
             { id: 33, name: "Panda", img: "https://i.pinimg.com/1200x/cf/d2/85/cfd285a97021713f6f5cada516043233.jpg", stats: { hp: 80, atk: 7, def: 8, spd: 6 }, moves: [{name: "Attacco d'Ansia", power: 0.8, effect: 'stun', description: "La sua ansia è così contagiosa da bloccare il nemico."}, {name: "Selfie Distraente", power: 0, effect: 'evade', description: "Scatta un selfie per distrarre e schivare."}, {name: "Conoscenza Pop", power: 1.0, description: "Usa la sua conoscenza della cultura pop per attaccare."}] },
             { id: 34, name: "Grizzly", img: "https://i.pinimg.com/1200x/ac/d7/36/acd736b2bc748e58f469c0911ad42567.jpg", stats: { hp: 92, atk: 9, def: 9, spd: 7 }, moves: [{name: "Abbraccio d'Orso", power: 1.2, description: "Un abbraccio così forte da fare danni."}, {name: "Leader Carismatico", power: 0, effect: 'team_atk_up', description: "Incoraggia la squadra, aumentando l'attacco."}, {name: "Rotolata", power: 1.3, description: "Rotola contro il nemico con tutto il suo peso."}] },
             { id: 35, name: "Zatch Bell", img: "https://i.pinimg.com/1200x/35/9c/9e/359c9e3e0530e20c95754847066e8167.jpg", stats: { hp: 85, atk: 11, def: 7, spd: 8 }, moves: [{name: "Zaker", power: 1.3, description: "Un fulmine che esce dalla bocca."}, {name: "Rashield", power: 1.0, effect: 'reflect', description: "Uno scudo che respinge gli attacchi."}, {name: "Zakeruga", power: 1.6, description: "Un raggio di fulmini concentrato e potente."}] },
@@ -167,20 +170,20 @@
             { id: 40, name: "Oggy", img: "https://i.pinimg.com/736x/ca/8a/de/ca8ade9acdf1115e9364fd30abd41754.jpg", stats: { hp: 75, atk: 7, def: 7, spd: 8 }, moves: [{name: "Acchiappamosche", power: 1.1, description: "Colpisce con un acchiappamosche."}, {name: "Fuga Disperata", power: 0, effect: 'evade', description: "Scappa per evitare il pericolo."}, {name: "Urlo di Panico", power: 0.8, effect: 'def_down', description: "Un urlo che spaventa e indebolisce."}] },
             { id: 41, name: "Pikachu", img: "https://i.pinimg.com/736x/ad/65/b6/ad65b669746561313925ffff392518bc.jpg", stats: { hp: 80, atk: 9, def: 6, spd: 11 }, moves: [{name: "Fulmine", power: 1.3, description: "Una potente scarica elettrica."}, {name: "Attacco Rapido", power: 1.1, description: "Un attacco che colpisce per primo."}, {name: "Locomovolt", power: 1.5, description: "Si carica di elettricità e placca il nemico."}] },
             { id: 42, name: "Lucario", img: "https://i.pinimg.com/1200x/6f/bf/ab/6fbfab2a5aceb54d48323128e7a10ae4.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 10 }, moves: [{name: "Forzasfera", power: 1.4, description: "Una sfera di aura che non può essere schivata."}, {name: "Palmoforza", power: 1.2, description: "Un colpo di palmo carico di energia."}, {name: "Ossoraffica", power: 1.3, description: "Crea un osso di energia e colpisce ripetutamente."}] },
-            { id: 43, name: "Roserade", img: "https://i.pinimg.com/1200x/67/88/49/678849c01d18a4e0b90038bc069642ce.jpg", stats: { hp: 85, atk: 10, def: 7, spd: 9 }, moves: [{name: "Velenospina", power: 1.2, effect: 'poison', description: "Lancia spine avvelenate."}, {name: "Gigassorbimento", power: 1.1, effect: 'lifesteal', description: "Assorbe l'energia vitale del nemico."}, {name: "Aromaterapia", power: 0, effect: 'heal', description: "Rilascia un profumo che cura."}] },
+            { id: 43, name: "Roserade", img: "https://i.pinimg.com/1200x/67/88/49/678849c01d18a4e0b90038bc069642ce.jpg", stats: { hp: 85, atk: 10, def: 7, spd: 9 }, moves: [{name: "Velenospina", power: 1.2, effect: 'poison', description: "Lancia spine avvelenate."}, {name: "Gigassorbimento", power: 1.1, effect: 'lifesteal', description: "Assorbe l'energia vitale del nemico."}, {name: "Aromaterapia", power: 0, effect: 'heal', healAmount: [10, 15], description: "Rilascia un profumo che cura."}] },
             { id: 44, name: "Empoleon", img: "https://i.pinimg.com/1200x/b2/52/ea/b252eac40b5327d0691ddf9e6c9ec7d3.jpg", stats: { hp: 95, atk: 10, def: 10, spd: 7 }, moves: [{name: "Bollaraggio", power: 1.3, description: "Un raggio di bolle ad alta pressione."}, {name: "Perforbecco", power: 1.2, description: "Un colpo preciso con il becco affilato."}, {name: "Alacciaio", power: 1.1, effect: 'def_up', description: "Colpisce con ali dure come l'acciaio."}] },
             { id: 45, name: "Elsa", img: "https://i.pinimg.com/736x/fd/26/cd/fd26cd346c9e73430dc9ba28e318fb74.jpg", stats: { hp: 88, atk: 11, def: 7, spd: 8 }, moves: [{name: "Raggio Gelido", power: 1.3, effect: 'freeze', description: "Un raggio che può congelare il nemico."}, {name: "Muro di Ghiaccio", power: 0, effect: 'def_up', description: "Crea un muro di ghiaccio per proteggersi."}, {name: "Tormenta", power: 1.5, description: "Scatena una bufera di neve e ghiaccio."}] },
             { id: 46, name: "Leavanny", img: "https://i.pinimg.com/736x/72/b6/ff/72b6ffcd1396128f0f2235281171bc92.jpg", stats: { hp: 88, atk: 10, def: 8, spd: 9 }, moves: [{name: "Fendifoglia", power: 1.3, description: "Colpisce con lame di foglie affilate."}, {name: "Forbice X", power: 1.4, description: "Un potente doppio fendente."}, {name: "Rete Vischiosa", power: 0, effect: 'spd_down', description: "Lancia una rete che rallenta il nemico."}] },
             { id: 47, name: "Uncle Grandpa", img: "https://i.pinimg.com/736x/07/ee/87/07ee872f5009c41d6be260e17e6b1753.jpg", stats: { hp: 100, atk: 9, def: 9, spd: 7 }, moves: [{name: "Buongiorno!", power: 1.2, description: "Un saluto così entusiasta da fare danni."}, {name: "Evoca Marsupio", power: 1.3, description: "Tira fuori qualcosa di casuale dal marsupio."}, {name: "Realtà Alterata", power: 1.5, description: "Altera la realtà in modo imprevedibile."}] },
-            { id: 48, name: "Clarence", img: "https://i.pinimg.com/1200x/ed/50/84/ed5084c8f0cf0f3f7c9f60df18346c20.jpg", stats: { hp: 80, atk: 7, def: 7, spd: 6 }, moves: [{name: "Abbraccio Amichevole", power: 0, effect: 'heal', description: "Un abbraccio che cura l'anima e il corpo."}, {name: "Patatine Fritte", power: 1.0, description: "Lancia patatine fritte unte."}, {name: "Ottimismo Contagioso", power: 0, effect: 'team_stat_up', description: "Il suo ottimismo potenzia tutta la squadra."}] },
+            { id: 48, name: "Clarence", img: "https://i.pinimg.com/1200x/ed/50/84/ed5084c8f0cf0f3f7c9f60df18346c20.jpg", stats: { hp: 80, atk: 7, def: 7, spd: 6 }, moves: [{name: "Abbraccio Amichevole", power: 0, effect: 'heal', healAmount: [5, 10], description: "Un abbraccio che cura l'anima e il corpo."}, {name: "Patatine Fritte", power: 1.0, description: "Lancia patatine fritte unte."}, {name: "Ottimismo Contagioso", power: 0, effect: 'team_stat_up', description: "Il suo ottimismo potenzia tutta la squadra."}] },
             { id: 49, name: "Ariel", img: "https://i.pinimg.com/736x/fe/a4/2e/fea42ebd0c67f19d1c0df8fe7a9c6613.jpg", stats: { hp: 80, atk: 8, def: 7, spd: 8 }, moves: [{name: "Canto Incantatore", power: 1.0, effect: 'stun', description: "Una melodia che può bloccare il nemico."}, {name: "Colpo di Coda", power: 1.2, description: "Un potente colpo con la sua coda."}, {name: "Curiosità", power: 0, effect: 'stat_up', description: "Trova un oggetto che la potenzia."}] },
             { id: 50, name: "Sdentato", img: "https://i.pinimg.com/736x/ff/55/0d/ff550dddd5b612d28fcc3524937826cb.jpg", stats: { hp: 95, atk: 11, def: 8, spd: 12 }, moves: [{name: "Colpo al Plasma", power: 1.6, description: "Un colpo di plasma esplosivo."}, {name: "Volo Acrobatico", power: 1.1, description: "Un attacco aereo rapido e agile."}, {name: "Invisibilità Notturna", power: 0, effect: 'evade', description: "Si mimetizza per schivare un attacco."}] },
-            { id: 51, name: "Po", img: "https://i.pinimg.com/1200x/fb/99/a5/fb99a5c7ce5b313ed1c4e71ee0260a9b.jpg", stats: { hp: 105, atk: 10, def: 10, spd: 5 }, moves: [{name: "Pancia Rimbalzante", power: 1.2, description: "Usa la sua pancia per respingere e danneggiare."}, {name: "Mossa Wuxi", power: 1.8, description: "La leggendaria presa del dito Wuxi."}, {name: "Divora Ravioli", power: 0, effect: 'heal', description: "Una pausa per uno spuntino rigenerante."}] },
+            { id: 51, name: "Po", img: "https://i.pinimg.com/1200x/fb/99/a5/fb99a5c7ce5b313ed1c4e71ee0260a9b.jpg", stats: { hp: 105, atk: 10, def: 10, spd: 5 }, moves: [{name: "Pancia Rimbalzante", power: 1.2, description: "Usa la sua pancia per respingere e danneggiare."}, {name: "Mossa Wuxi", power: 1.8, description: "La leggendaria presa del dito Wuxi."}, {name: "Divora Ravioli", power: 0, effect: 'heal', healAmount: [25, 30], description: "Una pausa per uno spuntino rigenerante."}] },
             { id: 52, name: "Master Shifu", img: "https://i.pinimg.com/736x/5e/97/90/5e/97909a5ff537fad44a39578f9130e2.jpg", stats: { hp: 80, atk: 9, def: 7, spd: 11 }, moves: [{name: "Presa del Dito Wuxi", power: 1.5, description: "Una tecnica letale e precisa."}, {name: "Calcio Veloce", power: 1.2, description: "Una raffica di calci rapidissimi."}, {name: "Pace Interiore", power: 0, effect: 'stat_up', description: "Si concentra per aumentare le sue statistiche."}] },
             { id: 53, name: "Tigre", img: "https://i.pinimg.com/736x/d0/27/88/d027883c4433588403dba9de4aa05eef.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 10 }, moves: [{name: "Artigli di Fuoco", power: 1.4, description: "Colpi così veloci da sembrare infuocati."}, {name: "Balzo Felino", power: 1.2, description: "Balza sul nemico con ferocia."}, {name: "Stile della Tigre", power: 1.3, description: "Una serie di colpi potenti e aggraziati."}] },
             { id: 54, name: "Ladybug", img: "https://i.pinimg.com/736x/72/32/f1/7232f16bdab9dd11a2fa77403a1fe9f1.jpg", stats: { hp: 85, atk: 9, def: 9, spd: 10 }, moves: [{name: "Yo-Yo Veloce", power: 1.2, description: "Usa il suo yo-yo come arma."}, {name: "Lucky Charm", power: 1.0, effect: 'random', description: "Evoca un oggetto casuale per un attacco a sorpresa."}, {name: "Miraculous Ladybug", power: 0, effect: 'team_heal', description: "Ripara i danni e cura leggermente la squadra."}] },
             { id: 55, name: "Chat Noir", img: "https://i.pinimg.com/736x/c3/ed/77/c3ed7755f4cbee4cd34316139d132597.jpg", stats: { hp: 85, atk: 10, def: 8, spd: 11 }, moves: [{name: "Bastone Estensibile", power: 1.3, description: "Colpisce da lontano con il suo bastone."}, {name: "Cataclisma", power: 1.8, description: "Un tocco distruttivo che infligge danni enormi."}, {name: "Visione Notturna", power: 0, effect: 'atk_up', description: "Aumenta la sua precisione e attacco."}] },
-            { id: 56, name: "Rena Rouge", img: "https://i.pinimg.com/736x/de/9d/47/de9d4781d1e2a1956088db188b16dbfc.jpg", stats: { hp: 82, atk: 8, def: 8, spd: 10 }, moves: [{name: "Flauto Traverso", power: 1.1, description: "Usa il suo flauto come arma contundente."}, {name: "Miraggio", power: 0, effect: 'evade', description: "Crea un'illusione per schivare un attacco."}, {name: "Agilità Volpina", power: 0, effect: 'spd_up', description: "Aumenta la sua velocità."}] },
+            { id: 56, name: "Rena Rouge", img: "https://i.pinimg.com/736x/de/9d/47/de9d4781d1e2a1956088db188b16dbfc.jpg", stats: { hp: 82, atk: 8, def: 8, spd: 10 }, moves: [{name: "Flauto Traverso", power: 1.1, description: "Usa il suo flauto come arma contundente."}, {name: "Miraggio", power: 0, effect: 'heal', healAmount: [6, 10], description: "Crea un'illusione che confonde il nemico e recupera da 6 a 10 HP."}, {name: "Agilità Volpina", power: 0, effect: 'spd_up', description: "Aumenta la sua velocità."}] },
             { id: 57, name: "Picchio Picchiarello", img: "https://i.pinimg.com/736x/55/7a/63/557a63502c086c8e74cd2f5868b38f23.jpg", stats: { hp: 75, atk: 8, def: 6, spd: 11 }, moves: [{name: "Beccata Rapida", power: 1.2, description: "Una serie di beccate velocissime."}, {name: "Risata Folle", power: 0.8, effect: 'def_down', description: "Una risata che deconcentra e indebolisce."}, {name: "Volo Imprevedibile", power: 0, effect: 'evade', description: "Vola in modo caotico per schivare."}] },
             { id: 58, name: "Doraemon", img: "https://i.pinimg.com/736x/b1/75/de/b175de80fb0f5ca9b5230f0b12f3c13c.jpg", stats: { hp: 85, atk: 7, def: 10, spd: 6 }, moves: [{name: "Chiusky a Sorpresa", power: 1.2, description: "Tira fuori un gadget a caso dalla tasca."}, {name: "Copri-pane mnemonico", power: 0, effect: 'stat_up', description: "Usa un gadget per potenziare le sue statistiche."}, {name: "Dokodemo Porta", power: 0, effect: 'evade', description: "Usa la porta per fuggire da un attacco."}] },
             { id: 59, name: "Lola Bunny", img: "https://i.pinimg.com/1200x/ee/12/ad/ee12ad4d87c9f5e3bafb2e1bc9676439.jpg", stats: { hp: 80, atk: 8, def: 7, spd: 10 }, moves: [{name: "Tiro da Tre Punti", power: 1.3, description: "Lancia la palla con una precisione mortale."}, {name: "Finta Veloce", power: 1.1, description: "Una finta che sbilancia l'avversario."}, {name: "Sguardo Ammaliante", power: 0, effect: 'stun', description: "Distrae il nemico con il suo fascino."}] },
@@ -191,13 +194,13 @@
             { id: 64, name: "Kirby", img: "https://i.pinimg.com/736x/ba/e6/63/bae6637b3efecfd002f0c1f9605e53be.jpg", stats: { hp: 90, atk: 9, def: 9, spd: 7 }, moves: [{name: "Aspirazione", power: 1.2, effect: 'copy', description: "Aspira il nemico per copiarne le abilità."}, {name: "Trasformazione Copia", power: 1.4, description: "Usa il potere che ha copiato."}, {name: "Stella Warp", power: 1.3, description: "Evoca la sua stella per un attacco in picchiata."}] },
             { id: 65, name: "Yuko", img: "https://i.pinimg.com/736x/d5/54/18/d5541847c4fd0f22b49062782b88fb9d.jpg", stats: { hp: 85, atk: 9, def: 8, spd: 10 }, moves: [{name: "Anello Magico", power: 1.3, description: "Usa il suo anello per un attacco energetico."}, {name: "Volo Elfico", power: 0, effect: 'evade', description: "Vola agilmente per schivare."}, {name: "Strategia Astuta", power: 0, effect: 'atk_up', description: "Pianifica una mossa che aumenta il suo attacco."}] },
             { id: 66, name: "Raffaello", img: "https://i.pinimg.com/1200x/46/36/73/463673bdc942b4d0d948fa9190a0d672.jpg", stats: { hp: 90, atk: 11, def: 9, spd: 8 }, moves: [{name: "Colpo di Sai", power: 1.3, description: "Un attacco rapido e preciso con i suoi sai."}, {name: "Attacco Furioso", power: 1.5, description: "Una raffica di colpi carichi di rabbia."}, {name: "Battuta Sarcastica", power: 1.0, description: "Una battuta che fa male... in qualche modo."}] },
-            { id: 67, name: "Donatello", img: "https://i.pinimg.com/736x/6e/1a/48/6e1a488f5206230863a93b92e8c0ab74.jpg", stats: { hp: 88, atk: 9, def: 10, spd: 8 }, moves: [{name: "Colpo di Bo", power: 1.2, description: "Un colpo ben assestato con il suo bastone."}, {name: "Invenzione Tecnologica", power: 1.1, effect: 'random', description: "Usa un gadget improvvisato."}, {name: "Analisi Tattica", power: 0, effect: 'def_down', description: "Trova un punto debole nella difesa nemica."}] },
-            { id: 68, name: "Michelangelo", img: "https://i.pinimg.com/736x/eb/56/db/eb56dbd96a61a6c4c00ab95691eb218d.jpg", stats: { hp: 88, atk: 9, def: 8, spd: 10 }, moves: [{name: "Nunchaku Rotante", power: 1.4, description: "Fa roteare i suoi nunchaku a velocità incredibile."}, {name: "Cowabunga!", power: 1.2, description: "Un attacco pieno di entusiasmo."}, {name: "Pizza Curativa", power: 0, effect: 'heal', description: "Mangia una fetta di pizza per recuperare energie."}] },
+            { id: 67, name: "Spinel", img: "https://i.pinimg.com/736x/d2/78/b0/d278b0606af1be5a2fb8ebf69dfca045.jpg", stats: { hp: 85, atk: 10, def: 6, spd: 12 }, moves: [{name: "Pugno Allungabile", power: 1.3, description: "Colpisce da lontano con un pugno elastico."}, {name: "Girotondo Veloce", power: 1.2, description: "Gira su se stessa colpendo ripetutamente."}, {name: "Iniettore di Veleno", power: 1.5, effect: 'poison', description: "Usa la sua falce per un attacco velenoso."}] },
+            { id: 68, name: "Wonder Woman", img: "https://i.pinimg.com/736x/25/7a/a6/257aa66c1704bc9c14787e3391a6234a.jpg", stats: { hp: 95, atk: 11, def: 10, spd: 9 }, moves: [{name: "Lazo della Verità", power: 1.2, effect: 'stun', description: "Cattura e blocca il nemico."}, {name: "Bracciali della Sottomissione", power: 0, effect: 'reflect', description: "Respinge un attacco nemico."}, {name: "Colpo Amazzone", power: 1.5, description: "Un potente attacco intriso di forza divina."}] },
             { id: 69, name: "Chef Hatchet", img: "https://i.pinimg.com/1200x/4f/7c/8b/4f7c8bc30de9875dba940c17fcd6264a.jpg", stats: { hp: 95, atk: 10, def: 9, spd: 6 }, moves: [{name: "Cucchiaio di Legno", power: 1.3, description: "Un colpo doloroso con un cucchiaio gigante."}, {name: "Cibo Disgustoso", power: 1.0, effect: 'poison', description: "Lancia il suo cibo che avvelena il nemico."}, {name: "Addestramento Militare", power: 0, effect: 'stat_up', description: "Usa la sua esperienza per potenziarsi."}] },
             { id: 70, name: "Superboy", img: "https://i.pinimg.com/736x/80/5f/15/805f15509fe06d3748c019f8c4b2e00c.jpg", stats: { hp: 100, atk: 11, def: 10, spd: 9 }, moves: [{name: "Super Pugno", power: 1.4, description: "Un pugno con una forza incredibile."}, {name: "Visione Termica", power: 1.3, description: "Raggi di calore sparati dagli occhi."}, {name: "Invulnerabilità", power: 0, effect: 'def_up', description: "Indurisce la sua pelle per resistere ai colpi."}] },
             { id: 71, name: "Aang", img: "https://i.pinimg.com/736x/05/01/fc/0501fc8ed44f7bd4ad9e74d9bb959669.jpg", stats: { hp: 88, atk: 10, def: 8, spd: 11 }, moves: [{name: "Dominio dell'Aria", power: 1.3, description: "Un potente colpo di vento."}, {name: "Stato dell'Avatar", power: 1.8, description: "Scatena il potere di tutti gli Avatar."}, {name: "Scooter d'Aria", power: 1.1, description: "Si muove rapidamente per un colpo a sorpresa."}] },
             { id: 72, name: "Zuko", img: "https://i.pinimg.com/736x/f3/ac/60/f3ac60495d1922cc97723975473b7c8d.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 9 }, moves: [{name: "Dominio del Fuoco", power: 1.4, description: "Un attacco con le fiamme."}, {name: "Spade Doppie", power: 1.3, description: "Un rapido attacco con le sue spade."}, {name: "Redirezione Fulmine", power: 1.6, effect: 'counter', description: "Rispedisce al mittente un attacco energetico."}] },
-            { id: 73, name: "Katara", img: "https://i.pinimg.com/736x/00/14/5e/00145ebb0ae3ae4b2af824d831faf313.jpg", stats: { hp: 88, atk: 10, def: 8, spd: 9 }, moves: [{name: "Frusta d'Acqua", power: 1.3, description: "Colpisce il nemico con una frusta d'acqua."}, {name: "Dominio del Sangue", power: 1.0, effect: 'stun', description: "Controlla il nemico per un turno."}, {name: "Guarigione Acquatica", power: 0, effect: 'heal', description: "Usa l'acqua per curare le sue ferite."}] },
+            { id: 73, name: "Katara", img: "https://i.pinimg.com/736x/00/14/5e/00145ebb0ae3ae4b2af824d831faf313.jpg", stats: { hp: 88, atk: 10, def: 8, spd: 9 }, moves: [{name: "Frusta d'Acqua", power: 1.3, description: "Colpisce il nemico con una frusta d'acqua."}, {name: "Dominio del Sangue", power: 1.0, effect: 'stun', description: "Controlla il nemico per un turno."}, {name: "Guarigione Acquatica", power: 0, effect: 'heal', healAmount: [15, 20], description: "Usa l'acqua per curare le sue ferite."}] },
             { id: 74, name: "Phineas", img: "https://i.pinimg.com/736x/cf/84/b5/cf84b5f2d0db3addab2509f12dbcfe82.jpg", stats: { hp: 75, atk: 7, def: 7, spd: 8 }, moves: [{name: "Invenzione del Giorno", power: 1.4, effect: 'random', description: "Usa un'invenzione casuale per attaccare."}, {name: "Piano Geniale", power: 0, effect: 'stat_up', description: "Idea un piano che lo potenzia."}, {name: "Canzone Orecchiabile", power: 0.8, description: "Canta una canzone che distrae il nemico."}] },
             { id: 75, name: "Ferb", img: "https://i.pinimg.com/736x/63/04/d3/6304d368076442119f65936ca107067c.jpg", stats: { hp: 80, atk: 8, def: 8, spd: 7 }, moves: [{name: "Costruzione Rapida", power: 1.2, description: "Costruisce qualcosa al volo per colpire."}, {name: "Azione Silenziosa", power: 1.1, description: "Un attacco furtivo e silenzioso."}, {name: "Saggezza Profonda", power: 0, effect: 'stat_up', description: "Una sua perla di saggezza lo potenzia."}] },
             { id: 76, name: "Perry l'Ornitorinco", img: "https://i.pinimg.com/736x/59/f2/98/59f29865a1e5fd69d69984b4a8d91729.jpg", stats: { hp: 85, atk: 10, def: 9, spd: 10 }, moves: [{name: "Colpo di Coda", power: 1.3, description: "Un potente colpo con la coda."}, {name: "Cappello-Boomerang", power: 1.2, description: "Lancia il suo cappello come un boomerang."}, {name: "Sguardo Intenso", power: 1.0, effect: 'def_down', description: "Uno sguardo che intimidisce il nemico."}] },
@@ -309,7 +312,7 @@
             const gameRef = doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId);
             const updates = {};
             const playerCharacters = players[currentPlayerId].characters || [];
-            updates[`players.${currentPlayerId}.characters`] = [...playerCharacters, characterId];
+            updates[`players.${currentPlayerId}.characters`] = [...playerCharacters, { id: characterId, status: 'active' }];
             updates['draftState.availableCharacterIds'] = draftState.availableCharacterIds.filter(id => id !== characterId);
             const newPicksMade = draftState.picksMade + 1;
             updates['draftState.picksMade'] = newPicksMade;
@@ -417,7 +420,7 @@
 
                     if (newStatus === 'fighting' && globalState.userId === globalState.gameData.hostId) {
                         const { arenaState } = globalState.gameData;
-                        if (arenaState.status === 'selecting_fighters') handleCPUFighterSelection();
+                        if (arenaState.status === 'selecting_fighters' && Object.keys(arenaState.currentFighters).length < arenaState.fightingTeams.length) handleCPUFighterSelection();
                         else if (arenaState.status === 'fighting_dice') {
                             if (arenaState.diceRolls && Object.values(arenaState.diceRolls).every(v => v !== null)) {
                                 setTimeout(() => processDiceFight(), 1000);
@@ -455,32 +458,9 @@
             const { arenaState } = globalState.gameData;
             if (arenaState.status !== 'selecting_fighters') return;
             const gameRef = doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId);
-            const updates = {
+            await updateDoc(gameRef, {
                 [`arenaState.currentFighters.${globalState.userId}`]: characterId
-            };
-            
-            const fighterIds = Object.keys(arenaState.currentFighters);
-            if (fighterIds.length === 1 && !fighterIds.includes(globalState.userId)) {
-                const fightMode = Math.random() < 0.5 ? 'fighting_dice' : 'fighting_rpg';
-                updates['arenaState.status'] = fightMode;
-                const [p1Id, p2Id] = arenaState.fightingTeams;
-                const fighter1 = charactersDB.find(c => c.id === (p1Id === globalState.userId ? characterId : arenaState.currentFighters[p1Id]));
-                const fighter2 = charactersDB.find(c => c.id === (p2Id === globalState.userId ? characterId : arenaState.currentFighters[p2Id]));
-                updates['arenaState.log'] = [...arenaState.log, `${fighter1.name} e ${fighter2.name} entrano in arena!`];
-
-                if(fightMode === 'fighting_dice') {
-                    updates['arenaState.diceTurn'] = p1Id;
-                    updates['arenaState.diceRolls'] = { [p1Id]: null, [p2Id]: null };
-                } else {
-                    updates['arenaState.rpgBattle'] = {
-                        turn: p1Id,
-                        p1_hp: fighter1.stats.hp, p2_hp: fighter2.stats.hp,
-                        p1_max_hp: fighter1.stats.hp, p2_max_hp: fighter2.stats.hp,
-                        battleLog: ["Inizia la battaglia RPG!"]
-                    };
-                }
-            }
-            await updateDoc(gameRef, updates);
+            });
         }
 
         async function handleCPUFighterSelection() {
@@ -490,14 +470,14 @@
 
             for (const playerId of arenaState.fightingTeams) {
                 if (players[playerId].isCPU && !arenaState.currentFighters[playerId]) {
-                    const availableChars = players[playerId].characters;
+                    const availableChars = players[playerId].characters.filter(c => c.status === 'active');
                     const randomChar = availableChars[Math.floor(Math.random() * availableChars.length)];
-                    updates[`arenaState.currentFighters.${playerId}`] = randomChar;
+                    updates[`arenaState.currentFighters.${playerId}`] = randomChar.id;
                     currentFightersCount++;
                 }
             }
             
-            if (Object.keys(updates).length > 0) {
+            if (Object.keys(updates).length > 0 || currentFightersCount === 2) {
                  if (currentFightersCount === 2) {
                     const fightMode = Math.random() < 0.5 ? 'fighting_dice' : 'fighting_rpg';
                     updates['arenaState.status'] = fightMode;
@@ -583,22 +563,35 @@
             const defenderChar = charactersDB.find(c => c.id === arenaState.currentFighters[defenderId]);
             const move = attackerChar.moves[moveIndex];
 
-            const baseDamage = attackerChar.stats.atk * move.power;
-            const damage = Math.max(1, Math.floor(baseDamage - (defenderChar.stats.def * 0.5) + (Math.random() * 4 - 2)));
-            
-            const defenderCurrentHPKey = (defenderId === p1Id) ? 'p1_hp' : 'p2_hp';
-            const newHP = Math.max(0, arenaState.rpgBattle[defenderCurrentHPKey] - damage);
-            
             const updates = {};
-            updates[`arenaState.rpgBattle.${defenderCurrentHPKey}`] = newHP;
-            updates['arenaState.rpgBattle.turn'] = defenderId;
-            updates['arenaState.rpgBattle.battleLog'] = [...arenaState.rpgBattle.battleLog, `${attackerChar.name} usa ${move.name} e infligge ${damage} danni!`];
+            let newLog = [...arenaState.rpgBattle.battleLog];
             
-            if (newHP <= 0) {
-                await processFightEnd(attackerId, defenderId, `${attackerChar.name} ha sconfitto ${defenderChar.name} in una battaglia epica!`);
-            } else {
-                await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), updates);
+            if(move.power > 0) {
+                const baseDamage = attackerChar.stats.atk * move.power;
+                const damage = Math.max(1, Math.floor(baseDamage - (defenderChar.stats.def * 0.5) + (Math.random() * 4 - 2)));
+                const defenderCurrentHPKey = (defenderId === p1Id) ? 'p1_hp' : 'p2_hp';
+                const newHP = Math.max(0, arenaState.rpgBattle[defenderCurrentHPKey] - damage);
+                updates[`arenaState.rpgBattle.${defenderCurrentHPKey}`] = newHP;
+                newLog.push(`${attackerChar.name} usa ${move.name} e infligge ${damage} danni!`);
+                if (newHP <= 0) {
+                    await processFightEnd(attackerId, defenderId, `${attackerChar.name} ha sconfitto ${defenderChar.name} in una battaglia epica!`);
+                    return;
+                }
             }
+            
+            if(move.effect === 'heal') {
+                const [min, max] = move.healAmount;
+                const heal = Math.floor(Math.random() * (max - min + 1)) + min;
+                const attackerCurrentHPKey = (attackerId === p1Id) ? 'p1_hp' : 'p2_hp';
+                const attackerMaxHPKey = (attackerId === p1Id) ? 'p1_max_hp' : 'p2_max_hp';
+                const newHP = Math.min(arenaState.rpgBattle[attackerMaxHPKey], arenaState.rpgBattle[attackerCurrentHPKey] + heal);
+                updates[`arenaState.rpgBattle.${attackerCurrentHPKey}`] = newHP;
+                newLog.push(`${attackerChar.name} usa ${move.name} e recupera ${heal} HP!`);
+            }
+
+            updates['arenaState.rpgBattle.turn'] = defenderId;
+            updates['arenaState.rpgBattle.battleLog'] = newLog;
+            await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), updates);
         }
 
         function handleCPURPGMove() {
@@ -618,12 +611,13 @@
             const loserChar = charactersDB.find(c => c.id === arenaState.currentFighters[loserId]);
             
             const updates = {};
-            updates[`players.${loserId}.characters`] = players[loserId].characters.filter(id => id !== loserChar.id);
+            const loserTeamChars = players[loserId].characters.map(char => char.id === loserChar.id ? { ...char, status: 'defeated' } : char);
+            updates[`players.${loserId}.characters`] = loserTeamChars;
             updates[`players.${winnerId}.kills`] = (players[winnerId].kills || 0) + 1;
             
             const newLog = [...arenaState.log, `${winnerChar.name} (${players[winnerId].nickname}) ha sconfitto ${loserChar.name} (${players[loserId].nickname}). ${reason}`];
             
-            const loserTeamHasMembers = updates[`players.${loserId}.characters`].length > 0;
+            const loserTeamHasMembers = loserTeamChars.some(c => c.status === 'active');
             if (!loserTeamHasMembers) {
                 updates[`players.${loserId}.eliminated`] = true;
                 updates[`players.${loserId}.eliminatedInRound`] = arenaState.round;
@@ -646,6 +640,36 @@
                 await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), updates);
 
                 setTimeout(() => startNewRound(), 4000);
+            }
+        }
+        
+        async function forceNextAction() {
+            if(globalState.userId !== globalState.gameData.hostId) return;
+            const { arenaState, players } = globalState.gameData;
+            
+            let inactivePlayerId;
+            switch(arenaState.status) {
+                case 'selecting_fighters':
+                    inactivePlayerId = arenaState.fightingTeams.find(id => !arenaState.currentFighters[id] && !players[id].isCPU);
+                    if(inactivePlayerId) {
+                        const otherPlayerId = arenaState.fightingTeams.find(id => id !== inactivePlayerId);
+                        await processFightEnd(otherPlayerId, inactivePlayerId, "L'avversario non ha scelto un combattente in tempo!");
+                    }
+                    break;
+                case 'fighting_dice':
+                    inactivePlayerId = arenaState.diceTurn;
+                    if(!players[inactivePlayerId].isCPU) {
+                        const winnerId = arenaState.fightingTeams.find(id => id !== inactivePlayerId);
+                        await processFightEnd(winnerId, inactivePlayerId, "L'avversario non ha lanciato il dado in tempo!");
+                    }
+                    break;
+                case 'fighting_rpg':
+                    inactivePlayerId = arenaState.rpgBattle.turn;
+                     if(!players[inactivePlayerId].isCPU) {
+                        const winnerId = arenaState.fightingTeams.find(id => id !== inactivePlayerId);
+                        await processFightEnd(winnerId, inactivePlayerId, "L'avversario non ha eseguito una mossa in tempo!");
+                    }
+                    break;
             }
         }
 
@@ -682,7 +706,7 @@
         function renderMenuScreen() { return `<div class="w-full max-w-md mx-auto text-center"><h1 class="text-6xl font-black text-white mb-2">BATTAGLIA<span class="text-blue-400">ROYALE</span></h1><p class="text-gray-300 mb-10">Ciao, <span class="font-bold text-blue-400">${globalState.nickname}</span>! Cosa vuoi fare?</p><div class="space-y-4"><button id="create-game-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-lg text-xl btn-glow">Crea Stanza</button><div class="flex space-x-4"><input type="text" id="join-code-input" class="flex-grow bg-gray-700 border-2 border-gray-600 rounded-lg p-3 text-center focus:outline-none focus:border-blue-500" placeholder="CODICE STANZA"><button id="join-game-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn-glow">Unisciti</button></div><button id="find-game-btn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-4 rounded-lg text-lg btn-glow" disabled>Cerca Stanza (Prossimamente)</button></div></div>`; }
         function renderConfigScreen() { const { config } = globalState.gameData; return `<div class="w-full max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl"><h2 class="text-3xl font-bold text-center mb-6">Configurazione Partita</h2><div class="space-y-6"><div><label class="block text-lg font-medium text-gray-300 mb-2">Numero di Team: <span class="font-bold text-blue-400">${config.numTeams}</span></label><input id="num-teams-slider" type="range" min="2" max="8" value="${config.numTeams}" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"></div><div><label class="block text-lg font-medium text-gray-300 mb-2">Membri per Team: <span class="font-bold text-blue-400">${config.membersPerTeam}</span></label><input id="members-per-team-slider" type="range" min="4" max="10" value="${config.membersPerTeam}" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"></div></div><div class="mt-8 text-center"><button id="confirm-config-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-glow">Vai alla Lobby</button></div></div>`; }
         function renderLobbyScreen() { const { players, config, hostId } = globalState.gameData; const isHost = globalState.userId === hostId; const canStart = Object.keys(players).length >= 2 && Object.keys(players).length === config.numTeams; let html = `<div class="w-full max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl"><h2 class="text-3xl font-bold text-center mb-2">Lobby di Gioco</h2><p class="text-center text-gray-400 mb-6">Codice Stanza: <span id="room-code" class="font-bold text-2xl text-yellow-400 tracking-widest cursor-pointer" title="Copia codice">${globalState.gameId}</span></p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">`; for (let i = 0; i < config.numTeams; i++) { const playerId = Object.keys(players)[i]; const player = players[playerId]; if (player) { html += `<div class="bg-gray-700 p-4 rounded-lg text-center ${playerId === hostId ? 'border-2 border-yellow-400' : ''}"><p class="text-xl font-bold truncate">${player.nickname}</p><p class="text-sm ${player.isCPU ? 'text-cyan-400' : 'text-green-400'}">${player.isCPU ? 'CPU' : 'Giocatore'}</p></div>`; } else { html += `<div class="bg-gray-900 border-2 border-dashed border-gray-600 p-4 rounded-lg text-center text-gray-500 flex items-center justify-center"><p>In attesa...</p></div>`; } } html += `</div><div class="flex flex-col md:flex-row justify-between items-center mt-8"><button id="leave-game-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg mb-4 md:mb-0">Abbandona Stanza</button>${isHost ? `<div class="flex items-center space-x-4"><button id="add-cpu-btn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed" ${Object.keys(players).length >= config.numTeams ? 'disabled' : ''}>Aggiungi CPU</button><button id="start-game-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed" ${!canStart ? 'disabled' : ''}>Inizia Partita</button></div>` : '<p class="text-lg">In attesa che l\'host inizi la partita...</p>'}</div></div>`; return html; }
-        function renderDraftScreen() { const { draftState, players, config } = globalState.gameData; if (!draftState) return renderLoading(); const currentPlayerId = draftState.playerOrder[draftState.currentPlayerIndex]; const currentPlayer = players[currentPlayerId]; const isMyTurn = currentPlayerId === globalState.userId; const picksPerPlayer = players[globalState.userId]?.characters.length || 0; let html = `<div class="w-full max-w-7xl mx-auto flex flex-col h-screen"><div class="p-4 bg-gray-800 rounded-t-xl shadow-lg"><h1 class="text-3xl font-black text-center">SELEZIONE PERSONAGGI</h1><p class="text-center text-lg text-yellow-400 mt-2">Turno di: <span class="font-bold text-white">${currentPlayer.nickname}</span> ${isMyTurn ? '(Tocca a te!)' : ''}</p><p class="text-center text-gray-400">Selezione ${draftState.picksMade + 1} di ${draftState.totalPicks}</p></div><div class="flex-grow overflow-y-auto p-4 bg-gray-800 bg-opacity-50"><div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">`; charactersDB.forEach(char => { const isTaken = !draftState.availableCharacterIds.includes(char.id); const canSelect = isMyTurn && !isTaken && !currentPlayer.isCPU; html += `<div data-character-id="${char.id}" class="character-card ${isTaken ? 'taken' : ''} ${canSelect ? 'selectable cursor-pointer' : ''}"><img src="${char.img}" alt="${char.name}" class="w-full h-auto rounded-md aspect-square object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1f2937/9ca3af?text=?';"><p class="text-xs text-center mt-1 truncate p-1 bg-black bg-opacity-50 rounded-b-md">${char.name}</p></div>`; }); html += `</div></div><div class="p-4 bg-gray-800 rounded-b-xl shadow-lg"><h3 class="text-lg font-bold text-center">Il tuo Team (${picksPerPlayer}/${config.membersPerTeam})</h3><div class="flex justify-center items-center space-x-2 mt-2 min-h-[60px]">`; const myTeamChars = players[globalState.userId].characters; if (myTeamChars.length > 0) { myTeamChars.forEach(charId => { const charData = charactersDB.find(c => c.id === charId); html += `<img src="${charData.img}" title="${charData.name}" class="w-12 h-12 rounded-full border-2 border-blue-400 object-cover">`; }); } else { html += `<p class="text-gray-500">Nessun personaggio selezionato.</p>`; } html += `</div></div></div>`; return html; }
+        function renderDraftScreen() { const { draftState, players, config } = globalState.gameData; if (!draftState) return renderLoading(); const currentPlayerId = draftState.playerOrder[draftState.currentPlayerIndex]; const currentPlayer = players[currentPlayerId]; const isMyTurn = currentPlayerId === globalState.userId; const picksPerPlayer = players[globalState.userId]?.characters.length || 0; let html = `<div class="w-full max-w-7xl mx-auto flex flex-col h-screen"><div class="p-4 bg-gray-800 rounded-t-xl shadow-lg"><h1 class="text-3xl font-black text-center">SELEZIONE PERSONAGGI</h1><p class="text-center text-lg text-yellow-400 mt-2">Turno di: <span class="font-bold text-white">${currentPlayer.nickname}</span> ${isMyTurn ? '(Tocca a te!)' : ''}</p><p class="text-center text-gray-400">Selezione ${draftState.picksMade + 1} di ${draftState.totalPicks}</p></div><div class="flex-grow overflow-y-auto p-4 bg-gray-800 bg-opacity-50"><div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">`; charactersDB.forEach(char => { const isTaken = !draftState.availableCharacterIds.includes(char.id); const canSelect = isMyTurn && !isTaken && !currentPlayer.isCPU; html += `<div data-character-id="${char.id}" class="character-card ${isTaken ? 'taken' : ''} ${canSelect ? 'selectable cursor-pointer' : ''}"><img src="${char.img}" alt="${char.name}" class="w-full h-auto rounded-md aspect-square object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1f2937/9ca3af?text=?';"><p class="text-xs text-center mt-1 truncate p-1 bg-black bg-opacity-50 rounded-b-md">${char.name}</p></div>`; }); html += `</div></div><div class="p-4 bg-gray-800 rounded-b-xl shadow-lg"><h3 class="text-lg font-bold text-center">Il tuo Team (${picksPerPlayer}/${config.membersPerTeam})</h3><div class="flex justify-center items-center space-x-2 mt-2 min-h-[60px]">`; const myTeamChars = players[globalState.userId].characters; if (myTeamChars.length > 0) { myTeamChars.forEach(charObj => { const charData = charactersDB.find(c => c.id === charObj.id); html += `<img src="${charData.img}" title="${charData.name}" class="w-12 h-12 rounded-full border-2 border-blue-400 object-cover">`; }); } else { html += `<p class="text-gray-500">Nessun personaggio selezionato.</p>`; } html += `</div></div></div>`; return html; }
         function renderNamingScreen() { const myPlayer = globalState.gameData.players[globalState.userId]; if (!myPlayer) return renderLoading(); if (myPlayer.ready) { return `<div class="text-center"><h1 class="text-3xl font-bold">In attesa degli altri giocatori...</h1><svg class="animate-spin h-8 w-8 text-white mx-auto mt-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>`; } const usedColors = Object.values(globalState.gameData.players).map(p => p.teamColor).filter(Boolean); return `<div class="w-full max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl text-center"><h1 class="text-4xl font-bold">Crea il tuo Team</h1><p class="text-xl mt-2 text-gray-400">Dai un nome e un colore alla tua squadra.</p><div class="mt-8"><label for="team-name-input" class="text-lg font-medium">Nome del Team</label><input type="text" id="team-name-input" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg p-3 text-center text-lg focus:outline-none focus:border-blue-500 mt-2" placeholder="Nome epico..." maxlength="20"></div><div class="mt-6"><label class="text-lg font-medium">Colore del Team</label><div class="grid grid-cols-8 gap-2 mt-2"> ${teamColors.map(color => { const isTaken = usedColors.includes(color.hex) && myPlayer.teamColor !== color.hex; return `<div data-color="${color.hex}" class="color-swatch w-full h-12 rounded-lg cursor-pointer ${isTaken ? 'taken' : ''}" style="background-color: ${color.hex};"></div>`; }).join('')}</div></div><button id="confirm-team-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg mt-8 text-lg btn-glow disabled:opacity-50" disabled>Sono Pronto</button></div>`; }
         function renderArenaScreen() {
             const { players, arenaState } = globalState.gameData;
@@ -695,13 +719,15 @@
                 <div class="absolute top-4 right-4 w-64 space-y-4 z-10">
                     <div class="bg-black bg-opacity-70 p-3 rounded-lg">
                         <h3 class="font-bold text-yellow-400 text-center mb-2">Team in Gara</h3>
-                        <ul class="space-y-1 text-sm">${teamLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.teamName}</span> <span>${p.characters.length} membri</span></li>`).join('')}</ul>
+                        <ul class="space-y-1 text-sm">${teamLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.teamName}</span> <span>${p.characters.filter(c => c.status === 'active').length} membri</span></li>`).join('')}</ul>
                     </div>
                     <div class="bg-black bg-opacity-70 p-3 rounded-lg">
                         <h3 class="font-bold text-red-500 text-center mb-2">Migliori Uccisori</h3>
                         <ul class="space-y-1 text-sm">${killsLeaderboard.length > 0 ? killsLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.nickname}</span> <span>${p.kills} Kills</span></li>`).join('') : '<li class="text-center text-gray-400">Nessuna</li>'}</ul>
                     </div>
                 </div>
+                
+                ${globalState.userId === globalState.gameData.hostId ? `<button id="force-action-btn" class="absolute top-4 left-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg z-20" title="Forza il turno se un giocatore è bloccato">Forza Turno</button>` : ''}
 
                 <h1 class="text-5xl font-black text-center text-shadow mb-4">ROUND ${arenaState.round}</h1>
                 <p class="text-center text-yellow-400 text-xl mb-8">${arenaState.log[arenaState.log.length - 1]}</p>
@@ -712,13 +738,20 @@
                 const player = players[playerId];
                 if(player.eliminated) continue;
                 const isFighting = arenaState.fightingTeams && arenaState.fightingTeams.includes(playerId);
+                const activeChars = player.characters.filter(c => c.status === 'active');
+                const defeatedChars = player.characters.filter(c => c.status === 'defeated');
+
                 html += `<div class="bg-black bg-opacity-70 rounded-lg p-4 border-2 ${isFighting ? 'fighting-team' : 'border-transparent'}" style="border-color: ${isFighting ? '#facc15' : player.teamColor};">
                         <h2 class="text-2xl font-bold truncate" style="color: ${player.teamColor}; text-shadow: 0 0 5px ${player.teamColor};">${player.teamName}</h2>
                         <p class="text-sm text-gray-300 mb-3">${player.nickname}</p>
                         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-                            ${player.characters.map(charId => {
-                                const charData = charactersDB.find(c => c.id === charId);
-                                return `<div class="text-center"><img src="${charData.img}" title="${charData.name}" class="w-16 h-16 rounded-full border-2 object-cover mx-auto" style="border-color: ${player.teamColor};"><p class="text-xs truncate mt-1">${charData.name}</p></div>`;
+                            ${[...activeChars, ...defeatedChars].map(charObj => {
+                                const charData = charactersDB.find(c => c.id === charObj.id);
+                                const isDefeated = charObj.status === 'defeated';
+                                return `<div class="text-center">
+                                            <img src="${charData.img}" title="${charData.name}" class="w-16 h-16 rounded-full border-2 object-cover mx-auto ${isDefeated ? 'character-icon defeated' : ''}" style="border-color: ${player.teamColor};">
+                                            <p class="text-xs truncate mt-1 ${isDefeated ? 'text-gray-500' : ''}">${charData.name}</p>
+                                        </div>`;
                             }).join('')}
                         </div></div>`;
             }
@@ -734,7 +767,7 @@
         }
 
         function renderTeamRevealOverlay() { return `<div class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-40 fade-in"><div class="text-center"><h2 class="text-4xl font-black text-yellow-300 animate-pulse">Il fato sta scegliendo...</h2><p class="text-xl text-gray-300 mt-4">Chi si scontrerà nel prossimo round?</p></div></div>`; }
-        function renderFighterSelectionOverlay() { const myTeam = globalState.gameData.players[globalState.userId]; return `<div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40"><div class="bg-gray-800 p-8 rounded-xl shadow-2xl text-center w-full max-w-3xl"><h2 class="text-3xl font-bold text-yellow-400">Scegli il tuo combattente!</h2><p class="text-gray-300 my-4">Il tuo team è stato scelto per combattere. Seleziona un personaggio da mandare in arena.</p><div class="grid grid-cols-3 md:grid-cols-5 gap-4 mt-6">${myTeam.characters.map(charId => { const charData = charactersDB.find(c => c.id === charId); return `<div data-character-id="${charId}" class="character-card selectable cursor-pointer"><img src="${charData.img}" alt="${charData.name}" class="w-full h-auto rounded-md aspect-square object-cover"><p class="text-sm text-center mt-2 font-semibold">${charData.name}</p></div>`; }).join('')}</div></div></div>`; }
+        function renderFighterSelectionOverlay() { const myTeam = globalState.gameData.players[globalState.userId]; return `<div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40"><div class="bg-gray-800 p-8 rounded-xl shadow-2xl text-center w-full max-w-3xl"><h2 class="text-3xl font-bold text-yellow-400">Scegli il tuo combattente!</h2><p class="text-gray-300 my-4">Il tuo team è stato scelto per combattere. Seleziona un personaggio da mandare in arena.</p><div class="grid grid-cols-3 md:grid-cols-5 gap-4 mt-6">${myTeam.characters.filter(c => c.status === 'active').map(charObj => { const charData = charactersDB.find(c => c.id === charObj.id); return `<div data-character-id="${charObj.id}" class="character-card selectable cursor-pointer"><img src="${charData.img}" alt="${charData.name}" class="w-full h-auto rounded-md aspect-square object-cover"><p class="text-sm text-center mt-2 font-semibold">${charData.name}</p></div>`; }).join('')}</div></div></div>`; }
         function renderDiceFightOverlay() {
             const { arenaState, players } = globalState.gameData;
             const [player1Id, player2Id] = arenaState.fightingTeams;
@@ -804,16 +837,16 @@
             
             const winner = Object.values(players).find(p => !p.eliminated);
             const losers = Object.values(players).filter(p => p.eliminated).sort((a, b) => b.eliminatedInRound - a.eliminatedInRound);
-            const teamRanking = [winner, ...losers];
+            const teamRanking = winner ? [winner, ...losers] : losers;
 
-            const survivors = winner.characters.map(charId => {
-                const charData = charactersDB.find(c => c.id === charId);
+            const survivors = winner ? winner.characters.map(charObj => {
+                const charData = charactersDB.find(c => c.id === charObj.id);
                 return { ...charData, team: winner };
-            }).slice(0, 10);
+            }).slice(0, 10) : [];
 
             return `<div class="w-full max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl fade-in">
                         <h1 class="text-5xl font-black text-center text-yellow-400">IL TORNEO È CONCLUSO!</h1>
-                        <p class="text-2xl text-center mt-2">Il team <span class="font-bold" style="color:${winner.teamColor};">${winner.teamName}</span> è il vincitore!</p>
+                        ${winner ? `<p class="text-2xl text-center mt-2">Il team <span class="font-bold" style="color:${winner.teamColor};">${winner.teamName}</span> è il vincitore!</p>` : ''}
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                             <div>
@@ -834,7 +867,7 @@
                             <div>
                                 <h2 class="text-2xl font-bold text-center mb-4">Top Sopravvissuti</h2>
                                 <ul class="space-y-2">
-                                     ${survivors.map(char => `
+                                     ${survivors.length > 0 ? survivors.map(char => `
                                         <li class="flex items-center bg-gray-700 p-2 rounded-lg">
                                             <img src="${char.img}" class="w-12 h-12 rounded-full object-cover mr-4 border-2" style="border-color:${char.team.teamColor};">
                                             <div>
@@ -842,7 +875,7 @@
                                                 <p class="text-sm" style="color:${char.team.teamColor};">Team: ${char.team.teamName}</p>
                                             </div>
                                         </li>
-                                     `).join('')}
+                                     `).join('') : '<li class="text-center text-gray-400">Nessun sopravvissuto.</li>'}
                                 </ul>
                             </div>
                         </div>
@@ -898,6 +931,7 @@
                         handlePlayerMove(moveIndex);
                     });
                 });
+                document.getElementById('force-action-btn')?.addEventListener('click', forceNextAction);
             }
         }
 
