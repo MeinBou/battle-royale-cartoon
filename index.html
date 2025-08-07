@@ -411,7 +411,7 @@
         
         async function handleCPUNaming() {
             const { players } = globalState.gameData;
-            const cpuTeamNames = ["Team Dominio", "Squadra Omega", "Cyber Guerrieri", "Falangi d'Acciaio", "I Distruttori"];
+            const cpuTeamNames = ["Team Dominio", "Squadra Omega", "Cyber Guerrieri", "Falangi d'Acciaio", "I Distruttori", "Combattenti vincenti", "Lottatori acustici", "Spirito divino", "Ludoteca Napoli", "Foggiani", "Lampade e Candelabri"];
             let usedColors = Object.values(players).map(p => p.teamColor).filter(Boolean);
             for (const playerId in players) {
                 const player = players[playerId];
@@ -1268,7 +1268,7 @@
             document.getElementById('members-per-team-slider')?.addEventListener('input', e => updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), { 'config.membersPerTeam': parseInt(e.target.value) }));
             document.getElementById('confirm-config-btn')?.addEventListener('click', () => updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), { status: 'waiting' }));
             document.getElementById('leave-game-btn')?.addEventListener('click', leaveGame);
-            document.getElementById('add-cpu-btn')?.addEventListener('click', async () => { const cpuId = `CPU_${generateRoomCode()}`; const cpuNames = ["Terminator", "Skynet", "HAL9000", "Matrix", "Ultron", "Agent Smith"]; const cpuNickname = cpuNames[Math.floor(Math.random() * cpuNames.length)]; const playerUpdate = { [`players.${cpuId}`]: { nickname: cpuNickname, isCPU: true, teamName: '', teamColor: null, characters: [], eliminated: false, kills: 0, ready: false, eliminatedInRound: null } }; await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), playerUpdate); });
+            document.getElementById('add-cpu-btn')?.addEventListener('click', async () => { const cpuId = `CPU_${generateRoomCode()}`; const cpuTeamNames = ["Team Dominio", "Squadra Omega", "Cyber Guerrieri", "Falangi d'Acciaio", "I Distruttori"]; const cpuNickname = cpuNames[Math.floor(Math.random() * cpuNames.length)]; const playerUpdate = { [`players.${cpuId}`]: { nickname: cpuNickname, isCPU: true, teamName: '', teamColor: null, characters: [], eliminated: false, kills: 0, ready: false, eliminatedInRound: null } }; await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), playerUpdate); });
             document.getElementById('start-game-btn')?.addEventListener('click', initializeDraft);
             document.getElementById('room-code')?.addEventListener('click', (e) => { navigator.clipboard.writeText(e.target.innerText).then(() => { globalState.error = "Codice copiato!"; render(); }); });
 
