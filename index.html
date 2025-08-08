@@ -188,10 +188,11 @@ let charactersDB = [
 { id: 95, name: "Dexter", img: "https://i.pinimg.com/736x/c8/68/e6/c868e63417b5653ac6f1bfb965cea28c.jpg", stats: { hp: 70, atk: 11, def: 5, spd: 9 }, moves: [{name: "Invenzione Geniale", power: 1.4, effect: 'random', description: "Usa un'invenzione casuale e potente."}, {name: "Raggio Laser", power: 1.3, description: "Un raggio laser preciso dal suo laboratorio."}, {name: "DEE DEE!", power: 1.0, effect: 'stun', effectChance: 0.3, effectDuration: [2,2], uses: 4, description: "La distrazione di sua sorella blocca il nemico."}] },
 { id: 58, name: "Doraemon", img: "https://i.pinimg.com/736x/b1/75/de/b175de80fb0f5ca9b5230f0b12f3c13c.jpg", stats: { hp: 85, atk: 7, def: 10, spd: 6 }, moves: [{name: "Chiusky a Sorpresa", power: 1.2, description: "Tira fuori un gadget a caso dalla tasca."}, {name: "Copri-pane mnemonico", power: 0, effect: 'stat_up', description: "Usa un gadget per potenziare le sue statistiche."}, {name: "Dokodemo Porta", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "Diventa invulnerabile per 2 turni."}] },
 { id: 45, name: "Elsa", img: "https://i.pinimg.com/736x/fd/26/cd/fd26cd346c9e73430dc9ba28e318fb74.jpg", stats: { hp: 88, atk: 11, def: 7, spd: 8 }, moves: [{name: "Raggio Gelido", power: 1.3, effect: 'freeze', effectChance: 0.3, effectDuration: [2, 2], description: "Un raggio che ha una probabilità di congelare il nemico per 2 turni."}, {name: "Muro di Ghiaccio", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "Diventa invulnerabile per 2 turni."}, {name: "Tormenta", power: 1.5, description: "Scatena una bufera di neve e ghiaccio."}] },
-{ id: 44, name: "Empoleon", img: "https://i.pinimg.com/1200x/b2/52/ea/b252eac40b5327d0691ddf9e6c9ec7d3.jpg", stats: { hp: 95, atk: 10, def: 10, spd: 7 }, moves: [{name: "Idrovampata", power: 0, damage: [10, 14], effect: 'burn', effectChance: 0.6, effectDuration: [3, 4], effectDamage: [5, 8], description: "Un gayser bollente contro il bersaglio che puo' scottarlo."}, {name: "Geloraggio", power: 1.3, effect: 'freeze' description: "Un potente raggio che puo' congelare."}, {name: "Alacciaio", power: 1.1, effect: 'def_up', description: "Colpisce con ali dure come l'acciaio."}] },
+{ id: 44, name: "Empoleon", img: "https://i.pinimg.com/1200x/b2/52/ea/b252eac40b5327d0691ddf9e6c9ec7d3.jpg", stats: { hp: 95, atk: 10, def: 10, spd: 7 }, moves: [{name: "Idrovampata", power: 1.5, effect: 'burn', effectChance: 0.6, effectDuration: [3, 4], effectDamage: [5, 8], description: "Un raggio di bolle ad alta pressione."}, {name: "Perforbecco",  power: 0, damage: [10,14], description: "Un colpo preciso con il becco affilato."}, {name: "Alacciaio", power: 8, damage: [8, 8], effect: 'vortex', effectChance: 1.0, effectDuration: [5, 5], effectDamage: [5, 5], description: "Infligge 8 danni e intrappola il nemico per 5 turni, infliggendo 5 danni extra a turno."}] },
 { id: 93, name: "Eric Cartman", img: "https://i.pinimg.com/736x/31/3a/b7/313ab7f6d385f544ffc90681ae08c117.jpg", stats: { hp: 90, atk: 9, def: 10, spd: 4 }, moves: [{name: "Rispetta la mia autorità!", power: 0, damage: [8, 12], description: "Un colpo con un manganello che infligge 8-12 danni."}, {name: "Cheesy Poofs Curativi", power: 0, effect: 'heal', healAmount: [15, 20], uses: 4, description: "Mangia i suoi snack preferiti per curarsi."}, {name: "Lamenti Strazianti", power: 0, effect: 'stun', effectChance: 1.0, effectDuration: [2, 2], uses: 3, description: "Si lamenta così tanto da stordire il nemico per 2 turni."}] },
 { id: 75, name: "Ferb", img: "https://i.pinimg.com/736x/63/04/d3/6304d368076442119f65936ca107067c.jpg", stats: { hp: 80, atk: 8, def: 9, spd: 7 }, moves: [{name: "Costruzione Geniale", power: 0, damage: [6, 10], effect: 'random_status', effectChance: 0.5, description: "Infligge 6-10 danni e ha una probabilità di applicare uno status casuale."}, {name: "Raggio Laser", power: 0, damage: [14, 14], description: "Un potente raggio laser che infligge 14 danni."}, {name: "Dov'è Perry?", power: 0, effect: 'heal', healAmount: [30, 30], uses: 1, description: "Cura 30 HP (1 solo uso)."}] },
 { id: 5, name: "Finn", img: "https://i.pinimg.com/736x/29/83/75/298375aacfcc94f3310fad5578000f6d.jpg", stats: { hp: 80, atk: 9, def: 7, spd: 9 }, moves: [{name: "Colpo di Spada", power: 1.3, description: "Un fendente con la sua fidata spada."}, {name: "Urlo Eroico", power: 1.0, effect: 'atk_up', description: "Aumenta il proprio attacco."}, {name: "Avventura!", power: 1.4, description: "Un attacco imprevedibile e potente."}] },
+{ id: 87, name: "Francine Smith", img: "https://i.pinimg.com/736x/18/c1/d2/18c1d2489a64b1b4f9cc78318e62da94.jpg", stats: { hp: 85, atk: 9, def: 7, spd: 8 }, moves: [{name: "Muffin Esplosivi", power: 1.4, description: "Lancia dei muffin... sospetti."}, {name: "Pettegolezzo Letale", power: 1.0, effect: 'def_down', description: "Un pettegolezzo che distrugge l'autostima e la difesa."}, {name: "Furia Repressa", power: 1.5, description: "Scatena anni di frustrazione repressa."}] },
 { id: 87, name: "Francine Smith", img: "https://i.pinimg.com/736x/18/c1/d2/18c1d2489a64b1b4f9cc78318e62da94.jpg", stats: { hp: 120, atk: 9, def: 7, spd: 8 }, moves: [{name: "Muffin Esplosivi", power: 1.4, description: "Lancia dei muffin... sospetti."}, {name: "Pettegolezzo Letale", power: 1.0, effect: 'def_down', description: "Un pettegolezzo che distrugge l'autostima e la difesa."}, {name: "Furia Repressa", power: 1.5, description: "Scatena anni di frustrazione repressa."}] },
 { id: 10, name: "Garnet", img: "https://i.pinimg.com/736x/65/9b/d2/659bd260c80c7ecb1e2c1d7c7c3e9508.jpg", stats: { hp: 95, atk: 11, def: 9, spd: 7 }, moves: [{name: "Guanti-Razzo", power: 1.4, description: "Scaglia i suoi guanti con forza esplosiva."}, {name: "Visione Futura", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "Diventa invulnerabile per 2 turni."}, {name: "Elettrocinesi", power: 1.2, description: "Scatena una scarica elettrica."}] },
 { id: 106, name: "Ganyu", img: "https://i.pinimg.com/736x/46/db/7e/46db7e6db045ac28eff3a551e7754d50.jpg", stats: { hp: 80, atk: 11, def: 6, spd: 10 }, moves: [{name: "Freccia del fiocco di neve", power: 0, damage: [6, 10], effect: 'freeze', effectChance: 0.3, effectDuration: [2, 2], description: "30% di chance di congelare per 2 turni."}, {name: "Tiro Plenilunare", power: 0, damage: [10, 10], effect: 'special_conditional_damage', description: "Infligge 10 di danno, o 20 se il bersaglio è congelato."}, {name: "Sentiero del Qilin", power: 0, effect: 'invulnerability', effectDuration: [1, 1], uses: 3, description: "Invulnerabilità per 1 turno."}] },
@@ -228,6 +229,7 @@ let charactersDB = [
 { id: 32, name: "Orso Bianco", img: "https://i.pinimg.com/736x/9c/36/59/9c3659e69419f16abe572e4241667bcd.jpg", stats: { hp: 90, atk: 10, def: 9, spd: 7 }, moves: [{name: "Colpo Silenzioso", power: 0, damage: [30, 30], uses: 1, description: "Un colpo letale che infligge 30 danni."}, {name: "Colpo da Maestro", power: 0, damage: [8, 13], description: "Una serie di colpi precisi che infliggono 8-13 danni."}, {name: "Scivolata Gelida", power: 0, damage: [4, 4], effect: 'freeze', effectChance: 1.0, effectDuration: [2, 3], uses: 2, description: "Scivola e congela il nemico per 2-3 turni."}] },
 { id: 33, name: "Panda", img: "https://i.pinimg.com/1200x/cf/d2/85/cfd285a97021713f6f5cada516043233.jpg", stats: { hp: 80, atk: 7, def: 8, spd: 6 }, moves: [{name: "Filtro Kawaii", power: 0, damage: [7, 12], description: "Un attacco carino ma efficace che infligge 7-12 danni."}, {name: "Cuoricini Curativi", power: 0, effect: 'heal', healAmount: [14, 19], uses: 4, description: "Cura un alleato di 14-19 HP."}, {name: "Abbraccio Coccoloso", power: 0, damage: [10, 10], effect: 'stun', effectChance: 0.5, effectDuration: [2, 2], uses: 5, description: "Stritola il nemico, infliggendo 10 danni e con il 50% di stordirlo."}] },
 { id: 13, name: "Patrick Stella", img: "https://i.pinimg.com/1200x/27/e0/2e/27e02eadbe6a321a7d0a9641a394c811.jpg", stats: { hp: 90, atk: 9, def: 8, spd: 3 }, moves: [{name: "Testata", power: 1.4, description: "Una potente testata."}, {name: "Lancio della Roccia", power: 1.6, description: "Solleva e lancia la sua casa-roccia."}, {name: "Dormita Rigenerante", power: 0, effect: 'heal', healAmount: [20, 25], uses: 4, description: "Si addormenta per recuperare HP."}] },
+{ id: 11, name: "Perla", img: "https://i.pinimg.com/736x/7b/2e/b7/7b2eb73a3f511efa5bc182d1db60191b.jpg", stats: { hp: 80, atk: 9, def: 7, spd: 11 }, moves: [{name: "Colpo di Lancia", power: 1.5, description: "Un affondo preciso e veloce potenziato."}, {name: "Ologramma", power: 0.8, effect: 'stun', effectChance: 1.0, effectDuration: [2, 2], uses: 4, description: "Crea un ologramma per confondere e stordire per 2 turni."}, {name: "Parata Perfetta", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "Diventa invulnerabile per 2 turni."}] },
 { id: 11, name: "Perla", img: "https://i.pinimg.com/736x/7b/2e/b7/7b2eb73a3f511efa5bc182d1db60191b.jpg", stats: { hp: 80, atk: 9, def: 7, spd: 11 }, moves: [{name: "Colpo di Lancia", power: 0, damage: [10, 15], description: "Un affondo preciso e veloce potenziato."}, {name: "Ologramma", power: 0.8, effect: 'stun', effectChance: 1.0, effectDuration: [2, 2], uses: 4, description: "Crea un ologramma per confondere e stordire per 2 turni."}, {name: "Parata Perfetta", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "Diventa invulnerabile per 2 turni."}] },
 { id: 76, name: "Perry l'Ornitorinco", img: "https://i.pinimg.com/736x/59/f2/98/59f29865a1e5fd69d69984b4a8d91729.jpg", stats: { hp: 85, atk: 10, def: 9, spd: 10 }, moves: [{name: "Colpo di Coda", power: 1.3, description: "Un potente colpo con la coda."}, {name: "Cappello-Boomerang", power: 1.2, description: "Lancia il suo cappello come un boomerang."}, {name: "Sguardo Intenso", power: 1.0, effect: 'def_down', description: "Uno sguardo che intimidisce il nemico."}] },
 { id: 83, name: "Peter Griffin", img: "https://i.pinimg.com/736x/9e/40/74/9e4074bbe7890cd245b51b9ff5c0e33c.jpg", stats: { hp: 110, atk: 9, def: 7, spd: 4 }, moves: [{name: "Rissa da Bar", power: 1.3, description: "Inizia una rissa senza motivo."}, {name: "Uccello Uccello Uccello", power: 1.2, effect: 'stun', effectChance: 0.3, effectDuration: [2,2], uses: 4, description: "Balla in modo così fastidioso da bloccare il nemico."}, {name: "Risata fastidiosa", power: 1.0, effect: 'def_down', description: "Una risata che deconcentra e indebolisce."}] },
@@ -1021,11 +1023,11 @@ function renderMenuScreen() { return `<div class="w-full max-w-md mx-auto text-c
 function renderConfigScreen() { const { config } = globalState.gameData; return `<div class="w-full max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl"><h2 class="text-3xl font-bold text-center mb-6">Configurazione Partita</h2><div class="space-y-6"><div><label class="block text-lg font-medium text-gray-300 mb-2">Numero di Team: <span class="font-bold text-blue-400">${config.numTeams}</span></label><input id="num-teams-slider" type="range" min="2" max="8" value="${config.numTeams}" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"></div><div><label class="block text-lg font-medium text-gray-300 mb-2">Membri per Team: <span class="font-bold text-blue-400">${config.membersPerTeam}</span></label><input id="members-per-team-slider" type="range" min="4" max="10" value="${config.membersPerTeam}" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"></div></div><div class="mt-8 text-center"><button id="confirm-config-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-glow">Vai alla Lobby</button></div></div>`; }
 function renderLobbyScreen() { const { players, config, hostId } = globalState.gameData; const isHost = globalState.userId === hostId; const canStart = Object.keys(players).length >= 2 && Object.keys(players).length === config.numTeams; let html = `<div class="w-full max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl"><h2 class="text-3xl font-bold text-center mb-2">Lobby di Gioco</h2><p class="text-center text-gray-400 mb-6">Codice Stanza: <span id="room-code" class="font-bold text-2xl text-yellow-400 tracking-widest cursor-pointer" title="Copia codice">${globalState.gameId}</span></p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">`; for (let i = 0; i < config.numTeams; i++) { const playerId = Object.keys(players)[i]; const player = players[playerId]; if (player) { html += `<div class="bg-gray-700 p-4 rounded-lg text-center ${playerId === hostId ? 'border-2 border-yellow-400' : ''}"><p class="text-xl font-bold truncate">${player.nickname}</p><p class="text-sm ${player.isCPU ? 'text-cyan-400' : 'text-green-400'}">${player.isCPU ? 'CPU' : 'Giocatore'}</p></div>`; } else { html += `<div class="bg-gray-900 border-2 border-dashed border-gray-600 p-4 rounded-lg text-center text-gray-500 flex items-center justify-center"><p>In attesa...</p></div>`; } } html += `</div><div class="flex flex-col md:flex-row justify-between items-center mt-8"><button id="leave-game-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg mb-4 md:mb-0">Abbandona Stanza</button>${isHost ? `<div class="flex items-center space-x-4"><button id="add-cpu-btn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed" ${Object.keys(players).length >= config.numTeams ? 'disabled' : ''}>Aggiungi CPU</button><button id="start-game-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed" ${!canStart ? 'disabled' : ''}>Inizia Partita</button></div>` : '<p class="text-lg">In attesa che l\'host inizi la partita...</p>'}</div></div>`; return html; }
 function renderDraftScreen() { const { draftState, players, config, hostId } = globalState.gameData; if (!draftState) return renderLoading(); const currentPlayerId = draftState.playerOrder[draftState.currentPlayerIndex]; const currentPlayer = players[currentPlayerId]; const isMyTurn = currentPlayerId === globalState.userId; const isHost = globalState.userId === hostId; const canPickRandom = isMyTurn || (isHost && currentPlayer.isCPU); const picksPerPlayer = players[globalState.userId]?.characters.length || 0; let html = `<div class="w-full max-w-7xl mx-auto flex flex-col h-screen"><div class="p-4 bg-gray-800 rounded-t-xl shadow-lg">
-          <div class="flex justify-center items-center relative mb-2">
-              <h1 class="text-3xl font-black text-center">SELEZIONE PERSONAGGI</h1>
-              <button id="random-pick-btn" class="absolute right-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg btn-glow disabled:opacity-50 disabled:cursor-not-allowed" ${!canPickRandom ? 'disabled' : ''}>Scelta Casuale</button>
-          </div>
-          <p class="text-center text-lg text-yellow-400 mt-2">Turno di: <span class="font-bold text-white">${currentPlayer.nickname}</span> ${isMyTurn ? '(Tocca a te!)' : ''}</p><p class="text-center text-gray-400">Selezione ${draftState.picksMade + 1} di ${draftState.totalPicks}</p></div><div class="flex-grow overflow-y-auto p-4 bg-gray-800 bg-opacity-50"><div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">`; charactersDB.forEach(char => { const isTaken = !draftState.availableCharacterIds.includes(char.id); const canSelect = isMyTurn || (isHost && currentPlayer.isCPU); const selectableClass = canSelect && !isTaken ? 'selectable cursor-pointer' : ''; const isNew = char.isNew || false; html += `<div data-character-id="${char.id}" class="character-card relative ${isTaken ? 'taken' : ''} ${selectableClass} ${isNew ? 'new-character-glow' : ''}"><img src="${char.img}" alt="${char.name}" class="w-full h-auto rounded-md aspect-square object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1f2937/9ca3af?text=?';"> ${isNew ? '<div class="new-tag">Nuovo!</div>' : ''} <p class="text-xs text-center mt-1 truncate p-1 bg-black bg-opacity-50 rounded-b-md">${char.name}</p></div>`; }); html += `</div></div><div class="p-4 bg-gray-800 rounded-b-xl shadow-lg"><h3 class="text-lg font-bold text-center">Il tuo Team (${picksPerPlayer}/${config.membersPerTeam})</h3><div class="flex justify-center items-center space-x-2 mt-2 min-h-[60px]">`; const myTeamChars = players[globalState.userId].characters; if (myTeamChars.length > 0) { myTeamChars.forEach(charObj => { const charData = charactersDB.find(c => c.id === charObj.id); html += `<img src="${charData.img}" title="${charData.name}" class="w-12 h-12 rounded-full border-2 border-blue-400 object-cover">`; }); } else { html += `<p class="text-gray-500">Nessun personaggio selezionato.</p>`; } html += `</div></div></div>`; return html; }
+         <div class="flex justify-center items-center relative mb-2">
+             <h1 class="text-3xl font-black text-center">SELEZIONE PERSONAGGI</h1>
+             <button id="random-pick-btn" class="absolute right-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg btn-glow disabled:opacity-50 disabled:cursor-not-allowed" ${!canPickRandom ? 'disabled' : ''}>Scelta Casuale</button>
+         </div>
+         <p class="text-center text-lg text-yellow-400 mt-2">Turno di: <span class="font-bold text-white">${currentPlayer.nickname}</span> ${isMyTurn ? '(Tocca a te!)' : ''}</p><p class="text-center text-gray-400">Selezione ${draftState.picksMade + 1} di ${draftState.totalPicks}</p></div><div class="flex-grow overflow-y-auto p-4 bg-gray-800 bg-opacity-50"><div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">`; charactersDB.forEach(char => { const isTaken = !draftState.availableCharacterIds.includes(char.id); const canSelect = isMyTurn || (isHost && currentPlayer.isCPU); const selectableClass = canSelect && !isTaken ? 'selectable cursor-pointer' : ''; const isNew = char.isNew || false; html += `<div data-character-id="${char.id}" class="character-card relative ${isTaken ? 'taken' : ''} ${selectableClass} ${isNew ? 'new-character-glow' : ''}"><img src="${char.img}" alt="${char.name}" class="w-full h-auto rounded-md aspect-square object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1f2937/9ca3af?text=?';"> ${isNew ? '<div class="new-tag">Nuovo!</div>' : ''} <p class="text-xs text-center mt-1 truncate p-1 bg-black bg-opacity-50 rounded-b-md">${char.name}</p></div>`; }); html += `</div></div><div class="p-4 bg-gray-800 rounded-b-xl shadow-lg"><h3 class="text-lg font-bold text-center">Il tuo Team (${picksPerPlayer}/${config.membersPerTeam})</h3><div class="flex justify-center items-center space-x-2 mt-2 min-h-[60px]">`; const myTeamChars = players[globalState.userId].characters; if (myTeamChars.length > 0) { myTeamChars.forEach(charObj => { const charData = charactersDB.find(c => c.id === charObj.id); html += `<img src="${charData.img}" title="${charData.name}" class="w-12 h-12 rounded-full border-2 border-blue-400 object-cover">`; }); } else { html += `<p class="text-gray-500">Nessun personaggio selezionato.</p>`; } html += `</div></div></div>`; return html; }
 function renderNamingScreen() { const myPlayer = globalState.gameData.players[globalState.userId]; if (!myPlayer) return renderLoading(); if (myPlayer.ready) { return `<div class="text-center"><h1 class="text-3xl font-bold">In attesa degli altri giocatori...</h1><svg class="animate-spin h-8 w-8 text-white mx-auto mt-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>`; } const usedColors = Object.values(globalState.gameData.players).map(p => p.teamColor).filter(Boolean); return `<div class="w-full max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl text-center"><h1 class="text-4xl font-bold">Crea il tuo Team</h1><p class="text-xl mt-2 text-gray-400">Dai un nome e un colore alla tua squadra.</p><div class="mt-8"><label for="team-name-input" class="text-lg font-medium">Nome del Team</label><input type="text" id="team-name-input" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg p-3 text-center text-lg focus:outline-none focus:border-blue-500 mt-2" placeholder="Nome epico..." maxlength="20"></div><div class="mt-6"><label class="text-lg font-medium">Colore del Team</label><div class="grid grid-cols-8 gap-2 mt-2"> ${teamColors.map(color => { const isTaken = usedColors.includes(color.hex) && myPlayer.teamColor !== color.hex; return `<div data-color="${color.hex}" class="color-swatch w-full h-12 rounded-lg cursor-pointer ${isTaken ? 'taken' : ''}" style="background-color: ${color.hex};"></div>`; }).join('')}</div></div><button id="confirm-team-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg mt-8 text-lg btn-glow disabled:opacity-50" disabled>Sono Pronto</button></div>`; }
 function renderArenaScreen() {
 const { players, arenaState } = globalState.gameData;
@@ -1035,21 +1037,21 @@ const teamLeaderboard = Object.values(players).filter(p => !p.eliminated).sort((
 const killsLeaderboard = Object.values(players).filter(p => p.kills > 0).sort((a, b) => b.kills - a.kills);
 
 let html = `<div class="w-full h-screen bg-arena p-4 overflow-y-auto relative">
-              <div class="absolute top-4 right-4 w-64 space-y-4 z-10">
-                  <div class="bg-black bg-opacity-70 p-3 rounded-lg">
-                      <h3 class="font-bold text-yellow-400 text-center mb-2">Team in Gara</h3>
-                      <ul class="space-y-1 text-sm">${teamLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.teamName}</span> <span>${p.characters.filter(c => c.status === 'active').length} membri</span></li>`).join('')}</ul>
-                  </div>
-                  <div class="bg-black bg-opacity-70 p-3 rounded-lg">
-                      <h3 class="font-bold text-red-500 text-center mb-2">Migliori Uccisori</h3>
-                      <ul class="space-y-1 text-sm">${killsLeaderboard.length > 0 ? killsLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.nickname}</span> <span>${p.kills} Kills</span></li>`).join('') : '<li class="text-center text-gray-400">Nessuna</li>'}</ul>
-                  </div>
-              </div>
-              
-              <h1 class="text-5xl font-black text-center text-shadow mb-4">ROUND ${arenaState.round}</h1>
-              <p class="text-center text-yellow-400 text-xl mb-8">${arenaState.log[arenaState.log.length - 1]}</p>
-              
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">`;
+             <div class="absolute top-4 right-4 w-64 space-y-4 z-10">
+                 <div class="bg-black bg-opacity-70 p-3 rounded-lg">
+                     <h3 class="font-bold text-yellow-400 text-center mb-2">Team in Gara</h3>
+                     <ul class="space-y-1 text-sm">${teamLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.teamName}</span> <span>${p.characters.filter(c => c.status === 'active').length} membri</span></li>`).join('')}</ul>
+                 </div>
+                 <div class="bg-black bg-opacity-70 p-3 rounded-lg">
+                     <h3 class="font-bold text-red-500 text-center mb-2">Migliori Uccisori</h3>
+                     <ul class="space-y-1 text-sm">${killsLeaderboard.length > 0 ? killsLeaderboard.map(p => `<li class="flex justify-between"><span class="font-semibold truncate" style="color:${p.teamColor};">${p.nickname}</span> <span>${p.kills} Kills</span></li>`).join('') : '<li class="text-center text-gray-400">Nessuna</li>'}</ul>
+                 </div>
+             </div>
+             
+             <h1 class="text-5xl font-black text-center text-shadow mb-4">ROUND ${arenaState.round}</h1>
+             <p class="text-center text-yellow-400 text-xl mb-8">${arenaState.log[arenaState.log.length - 1]}</p>
+             
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">`;
 
 for (const playerId in players) {
 const player = players[playerId];
@@ -1059,18 +1061,18 @@ const activeChars = player.characters.filter(c => c.status === 'active');
 const defeatedChars = player.characters.filter(c => c.status === 'defeated');
 
 html += `<div class="bg-black bg-opacity-70 rounded-lg p-4 border-2 ${isFighting ? 'fighting-team' : 'border-transparent'}" style="border-color: ${isFighting ? '#facc15' : player.teamColor};">
-                              <h2 class="text-2xl font-bold truncate" style="color: ${player.teamColor}; text-shadow: 0 0 5px ${player.teamColor};">${player.teamName}</h2>
-                              <p class="text-sm text-gray-300 mb-3">${player.nickname}</p>
-                              <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-                                  ${[...activeChars, ...defeatedChars].map(charObj => {
-                                      const charData = charactersDB.find(c => c.id === charObj.id);
-                                      const isDefeated = charObj.status === 'defeated';
-                                      return `<div class="text-center">
-                                                  <img src="${charData.img}" title="${charData.name}" class="w-16 h-16 rounded-full border-2 object-cover mx-auto ${isDefeated ? 'character-icon defeated' : ''}" style="border-color: ${player.teamColor};">
-                                                  <p class="text-xs truncate mt-1 ${isDefeated ? 'text-gray-500' : ''}">${charData.name}</p>
-                                              </div>`;
-                                  }).join('')}
-                              </div></div>`;
+                             <h2 class="text-2xl font-bold truncate" style="color: ${player.teamColor}; text-shadow: 0 0 5px ${player.teamColor};">${player.teamName}</h2>
+                             <p class="text-sm text-gray-300 mb-3">${player.nickname}</p>
+                             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+                                 ${[...activeChars, ...defeatedChars].map(charObj => {
+                                     const charData = charactersDB.find(c => c.id === charObj.id);
+                                     const isDefeated = charObj.status === 'defeated';
+                                     return `<div class="text-center">
+                                                 <img src="${charData.img}" title="${charData.name}" class="w-16 h-16 rounded-full border-2 object-cover mx-auto ${isDefeated ? 'character-icon defeated' : ''}" style="border-color: ${player.teamColor};">
+                                                 <p class="text-xs truncate mt-1 ${isDefeated ? 'text-gray-500' : ''}">${charData.name}</p>
+                                             </div>`;
+                                 }).join('')}
+                             </div></div>`;
 }
 html += `</div>`;
 
@@ -1099,8 +1101,8 @@ hostControls = `<button id="force-dice-roll-btn" class="absolute top-4 left-4 bg
 }
 
 return `<div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40"><div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-4xl relative">
-                      ${hostControls}
-                      <h2 class="text-3xl font-bold text-center text-red-500 mb-6">SCONTRO AI DADI!</h2><div class="flex justify-around items-center text-center"><div class="flex flex-col items-center"><img src="${fighter1.img}" class="w-40 h-40 rounded-full border-4 object-cover" style="border-color:${team1.teamColor};"><h3 class="text-2xl font-bold mt-2">${fighter1.name}</h3><p class="text-lg" style="color:${team1.teamColor};">${team1.teamName}</p><div class="text-6xl font-black mt-4 h-20 flex items-center justify-center ${arenaState.diceRolls[player1Id] ? 'dice' : ''}">${arenaState.diceRolls[player1Id] || '?'}</div></div><div class="text-5xl font-black text-gray-500">VS</div><div class="flex flex-col items-center"><img src="${fighter2.img}" class="w-40 h-40 rounded-full border-4 object-cover" style="border-color:${team2.teamColor};"><h3 class="text-2xl font-bold mt-2">${fighter2.name}</h3><p class="text-lg" style="color:${team2.teamColor};">${team2.teamName}</p><div class="text-6xl font-black mt-4 h-20 flex items-center justify-center ${arenaState.diceRolls[player2Id] ? 'dice' : ''}">${arenaState.diceRolls[player2Id] || '?'}</div></div></div><div class="text-center mt-8">${myTurn ? `<button id="roll-dice-btn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-10 rounded-lg text-xl btn-glow">Lancia il Dado!</button>` : `<p class="text-xl">In attesa del lancio di ${players[arenaState.diceTurn].nickname}...</p>`}</div></div></div>`;
+                     ${hostControls}
+                     <h2 class="text-3xl font-bold text-center text-red-500 mb-6">SCONTRO AI DADI!</h2><div class="flex justify-around items-center text-center"><div class="flex flex-col items-center"><img src="${fighter1.img}" class="w-40 h-40 rounded-full border-4 object-cover" style="border-color:${team1.teamColor};"><h3 class="text-2xl font-bold mt-2">${fighter1.name}</h3><p class="text-lg" style="color:${team1.teamColor};">${team1.teamName}</p><div class="text-6xl font-black mt-4 h-20 flex items-center justify-center ${arenaState.diceRolls[player1Id] ? 'dice' : ''}">${arenaState.diceRolls[player1Id] || '?'}</div></div><div class="text-5xl font-black text-gray-500">VS</div><div class="flex flex-col items-center"><img src="${fighter2.img}" class="w-40 h-40 rounded-full border-4 object-cover" style="border-color:${team2.teamColor};"><h3 class="text-2xl font-bold mt-2">${fighter2.name}</h3><p class="text-lg" style="color:${team2.teamColor};">${team2.teamName}</p><div class="text-6xl font-black mt-4 h-20 flex items-center justify-center ${arenaState.diceRolls[player2Id] ? 'dice' : ''}">${arenaState.diceRolls[player2Id] || '?'}</div></div></div><div class="text-center mt-8">${myTurn ? `<button id="roll-dice-btn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-10 rounded-lg text-xl btn-glow">Lancia il Dado!</button>` : `<p class="text-xl">In attesa del lancio di ${players[arenaState.diceTurn].nickname}...</p>`}</div></div></div>`;
 }
 function getHPColor(percent) {
 if (percent > 50) return 'bg-green-500';
@@ -1147,15 +1149,15 @@ const hp2Color = getHPColor(hp2Percent);
 let bottomSection;
 if (myTurn && rpgBattle.phase === 'action') {
 bottomSection = `<div class="grid grid-cols-2 gap-3 mt-4">
-                  ${myChar.moves.map((move, index) => {
-                      const hasUses = move.uses !== undefined;
-                      const usesLeft = hasUses ? (myCharInGame.specialUses[index] ?? move.uses) : -1;
-                      const isDisabled = hasUses && usesLeft <= 0;
-                      return `<button data-move-index="${index}" title="${move.description}" class="rpg-move-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-sm btn-glow disabled:opacity-50 disabled:cursor-not-allowed" ${isDisabled ? 'disabled' : ''}>
-                                  ${move.name} ${hasUses ? `(${usesLeft}/${move.uses})` : ''}
-                              </button>`;
-                  }).join('')}
-              </div>`;
+                 ${myChar.moves.map((move, index) => {
+                     const hasUses = move.uses !== undefined;
+                     const usesLeft = hasUses ? (myCharInGame.specialUses[index] ?? move.uses) : -1;
+                     const isDisabled = hasUses && usesLeft <= 0;
+                     return `<button data-move-index="${index}" title="${move.description}" class="rpg-move-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-sm btn-glow disabled:opacity-50 disabled:cursor-not-allowed" ${isDisabled ? 'disabled' : ''}>
+                                 ${move.name} ${hasUses ? `(${usesLeft}/${move.uses})` : ''}
+                             </button>`;
+                 }).join('')}
+             </div>`;
 } else if (amFighting) {
 bottomSection = `<p class="text-center text-xl mt-4">In attesa di ${players[rpgBattle.turn].nickname}...</p>`;
 } else {
@@ -1163,30 +1165,30 @@ bottomSection = `<p class="text-center text-xl mt-4">Modalità Spettatore: Osser
 }
 
 return `<div class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-40">
-              <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-6xl relative">
-                  <h2 class="text-3xl font-bold text-center text-purple-400 mb-4">BATTAGLIA RPG!</h2>
-                  <div class="grid grid-cols-2 gap-8 items-start">
-                      <div class="text-center ${rpgBattle.turn === p1Id ? 'turn-highlight rounded-lg' : ''} p-4 relative">
-                          <img src="${fighter1.img}" class="w-48 h-48 rounded-full border-4 object-cover mx-auto" style="border-color:${players[p1Id].teamColor};">
-                          <div class="absolute top-4 right-4">${renderStatusBadge(rpgBattle.p1_status)}</div>
-                          <h3 class="text-2xl font-bold mt-2">${fighter1.name}</h3>
-                          <div class="w-full bg-gray-600 rounded-full h-6 mt-2 border-2 border-gray-500"><div class="${hp1Color} h-full rounded-full hp-bar-inner" style="width: ${hp1Percent}%;"></div></div>
-                          <p class="font-bold text-lg">${rpgBattle.p1_hp} / ${rpgBattle.p1_max_hp} HP</p>
-                      </div>
-                      <div class="text-center ${rpgBattle.turn === p2Id ? 'turn-highlight rounded-lg' : ''} p-4 relative">
-                          <img src="${fighter2.img}" class="w-48 h-48 rounded-full border-4 object-cover mx-auto" style="border-color:${players[p2Id].teamColor};">
-                          <div class="absolute top-4 right-4">${renderStatusBadge(rpgBattle.p2_status)}</div>
-                          <h3 class="text-2xl font-bold mt-2">${fighter2.name}</h3>
-                          <div class="w-full bg-gray-600 rounded-full h-6 mt-2 border-2 border-gray-500"><div class="${hp2Color} h-full rounded-full hp-bar-inner" style="width: ${hp2Percent}%;"></div></div>
-                          <p class="font-bold text-lg">${rpgBattle.p2_hp} / ${rpgBattle.p2_max_hp} HP</p>
-                      </div>
-                  </div>
-                  <div class="mt-4 border-t border-gray-600 pt-4">
-                      <p class="text-center text-lg text-yellow-300 h-8">${rpgBattle.battleLog[rpgBattle.battleLog.length - 1] || ''}</p>
-                      ${bottomSection}
-                  </div>
-              </div>
-          </div>`;
+             <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-6xl relative">
+                 <h2 class="text-3xl font-bold text-center text-purple-400 mb-4">BATTAGLIA RPG!</h2>
+                 <div class="grid grid-cols-2 gap-8 items-start">
+                     <div class="text-center ${rpgBattle.turn === p1Id ? 'turn-highlight rounded-lg' : ''} p-4 relative">
+                         <img src="${fighter1.img}" class="w-48 h-48 rounded-full border-4 object-cover mx-auto" style="border-color:${players[p1Id].teamColor};">
+                         <div class="absolute top-4 right-4">${renderStatusBadge(rpgBattle.p1_status)}</div>
+                         <h3 class="text-2xl font-bold mt-2">${fighter1.name}</h3>
+                         <div class="w-full bg-gray-600 rounded-full h-6 mt-2 border-2 border-gray-500"><div class="${hp1Color} h-full rounded-full hp-bar-inner" style="width: ${hp1Percent}%;"></div></div>
+                         <p class="font-bold text-lg">${rpgBattle.p1_hp} / ${rpgBattle.p1_max_hp} HP</p>
+                     </div>
+                     <div class="text-center ${rpgBattle.turn === p2Id ? 'turn-highlight rounded-lg' : ''} p-4 relative">
+                         <img src="${fighter2.img}" class="w-48 h-48 rounded-full border-4 object-cover mx-auto" style="border-color:${players[p2Id].teamColor};">
+                         <div class="absolute top-4 right-4">${renderStatusBadge(rpgBattle.p2_status)}</div>
+                         <h3 class="text-2xl font-bold mt-2">${fighter2.name}</h3>
+                         <div class="w-full bg-gray-600 rounded-full h-6 mt-2 border-2 border-gray-500"><div class="${hp2Color} h-full rounded-full hp-bar-inner" style="width: ${hp2Percent}%;"></div></div>
+                         <p class="font-bold text-lg">${rpgBattle.p2_hp} / ${rpgBattle.p2_max_hp} HP</p>
+                     </div>
+                 </div>
+                 <div class="mt-4 border-t border-gray-600 pt-4">
+                     <p class="text-center text-lg text-yellow-300 h-8">${rpgBattle.battleLog[rpgBattle.battleLog.length - 1] || ''}</p>
+                     ${bottomSection}
+                 </div>
+             </div>
+         </div>`;
 }
 function renderFinishedScreen() {
 const { players } = globalState.gameData;
@@ -1198,45 +1200,45 @@ const teamRanking = winner ? [winner, ...losers] : losers;
 const killsRanking = Object.values(players).filter(p => p.kills > 0).sort((a, b) => b.kills - a.kills);
 
 return `<div class="w-full max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl fade-in">
-                          <h1 class="text-5xl font-black text-center text-yellow-400">IL TORNEO È CONCLUSO!</h1>
-                          ${winner ? `<p class="text-2xl text-center mt-2">Il team <span class="font-bold" style="color:${winner.teamColor};">${winner.teamName}</span> è il vincitore!</p>` : ''}
-                          
-                          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                              <div>
-                                  <h2 class="text-2xl font-bold text-center mb-4">Classifica Team</h2>
-                                  <ol class="space-y-2">
-                                      ${teamRanking.map((p, index) => `
-                                          <li class="flex items-center bg-gray-700 p-3 rounded-lg">
-                                              <span class="text-2xl font-bold w-8">${index + 1}</span>
-                                              <div class="w-4 h-4 rounded-full mr-3" style="background-color:${p.teamColor};"></div>
-                                              <div>
-                                                  <p class="font-bold text-lg">${p.teamName}</p>
-                                                  <p class="text-sm text-gray-400">Leader: ${p.nickname}</p>
-                                              </div>
-                                          </li>
-                                      `).join('')}
-                                  </ol>
-                              </div>
-                              <div>
-                                  <h2 class="text-2xl font-bold text-center mb-4">Top Eliminazioni</h2>
-                                  <ul class="space-y-2">
-                                       ${killsRanking.length > 0 ? killsRanking.map((p, index) => `
-                                          <li class="flex items-center bg-gray-700 p-2 rounded-lg">
-                                              <span class="text-xl font-bold w-8">${index + 1}</span>
-                                              <div>
-                                                  <p class="font-bold text-lg" style="color:${p.teamColor};">${p.nickname}</p>
-                                              </div>
-                                              <span class="ml-auto font-bold text-lg">${p.kills} Kills</span>
-                                          </li>
-                                       `).join('') : '<li class="text-center text-gray-400">Nessuna eliminazione.</li>'}
-                                  </ul>
-                              </div>
-                          </div>
+                         <h1 class="text-5xl font-black text-center text-yellow-400">IL TORNEO È CONCLUSO!</h1>
+                         ${winner ? `<p class="text-2xl text-center mt-2">Il team <span class="font-bold" style="color:${winner.teamColor};">${winner.teamName}</span> è il vincitore!</p>` : ''}
+                         
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                             <div>
+                                 <h2 class="text-2xl font-bold text-center mb-4">Classifica Team</h2>
+                                 <ol class="space-y-2">
+                                     ${teamRanking.map((p, index) => `
+                                         <li class="flex items-center bg-gray-700 p-3 rounded-lg">
+                                             <span class="text-2xl font-bold w-8">${index + 1}</span>
+                                             <div class="w-4 h-4 rounded-full mr-3" style="background-color:${p.teamColor};"></div>
+                                             <div>
+                                                 <p class="font-bold text-lg">${p.teamName}</p>
+                                                 <p class="text-sm text-gray-400">Leader: ${p.nickname}</p>
+                                             </div>
+                                         </li>
+                                     `).join('')}
+                                 </ol>
+                             </div>
+                             <div>
+                                 <h2 class="text-2xl font-bold text-center mb-4">Top Eliminazioni</h2>
+                                 <ul class="space-y-2">
+                                      ${killsRanking.length > 0 ? killsRanking.map((p, index) => `
+                                         <li class="flex items-center bg-gray-700 p-2 rounded-lg">
+                                             <span class="text-xl font-bold w-8">${index + 1}</span>
+                                             <div>
+                                                 <p class="font-bold text-lg" style="color:${p.teamColor};">${p.nickname}</p>
+                                             </div>
+                                             <span class="ml-auto font-bold text-lg">${p.kills} Kills</span>
+                                         </li>
+                                      `).join('') : '<li class="text-center text-gray-400">Nessuna eliminazione.</li>'}
+                                 </ul>
+                             </div>
+                         </div>
 
-                          <div class="text-center mt-10">
-                              <button id="leave-game-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-glow">Torna al Menu</button>
-                          </div>
-                      </div>`;
+                         <div class="text-center mt-10">
+                             <button id="leave-game-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-glow">Torna al Menu</button>
+                         </div>
+                     </div>`;
 }
 
 
@@ -1314,4 +1316,3 @@ render();
 
 </script>
 </body>
-</html>
