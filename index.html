@@ -572,14 +572,16 @@ updates['arenaState.diceRolls'] = { [p1Id]: null, [p2Id]: null };
 const firstPlayer = fighter1.stats.spd > fighter2.stats.spd ? p1Id : (fighter2.stats.spd > fighter1.stats.spd ? p2Id : (Math.random() < 0.5 ? p1Id : p2Id));
 
 updates['arenaState.rpgBattle'] = {
-turn: firstPlayer,
-phase: 'action', 
-chosenMoveIndex: null,
-p1_id: p1Id, p2_id: p2Id,
-p1_hp: fighter1.stats.hp, p2_hp: fighter2.stats.hp,
-p1_max_hp: fighter1.stats.hp, p2_max_hp: fighter2.stats.hp,
-p1_status: null, p2_status: null,
-battleLog: ["Inizia la battaglia RPG!"]
+    turn: firstPlayer,
+    phase: 'action', 
+    chosenMoveIndex: null,
+    p1_id: p1Id, p2_id: p2Id,
+    p1_hp: fighter1.stats.hp, p2_hp: fighter2.stats.hp,
+    p1_max_hp: fighter1.stats.hp, p2_max_hp: fighter2.stats.hp,
+    p1_status: null, p2_status: null,
+    battleLog: ["Inizia la battaglia RPG!"],
+    p1_lastMoveName: null, // <-- AGGIUNGI QUESTA
+    p2_lastMoveName: null  // <-- AGGIUNGI QUESTA
 };
 }
 await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), updates);
@@ -767,6 +769,13 @@ if (defenderStatus && defenderStatus.type === 'freeze') {
 damage = 20;
 newLog.push(`Colpisce il punto debole congelato!`);
 }
+} else if (move.effect === 'special_conditional_damage_v' && move.name === 'Chàguru Imisudon') {
+                    const lastMove = isAttackerP1 ? rpgBattle.p1_lastMoveName : rpgBattle.p2_lastMoveName;
+                    damage = 10; // Danno base
+                    if (lastMove === 'Chaguru') {
+                        damage = 20; // Danno raddoppiato!
+                        newLog.push(`La potenza di Chaguru si scatena! Danno raddoppiato!`);
+                    }
 } else if (move.damage) {
 damage = Math.floor(Math.random() * (move.damage[1] - move.damage[0] + 1)) + move.damage[0];
 } else if (move.power > 0) {
@@ -911,7 +920,15 @@ rpgBattle.turn = defenderId; // Switch turn
 rpgBattle.phase = 'action'; // Wait for next player's input
 rpgBattle.chosenMoveIndex = null;
 rpgBattle.battleLog = [...rpgBattle.battleLog, ...newLog];
-
+// Salva l'ultima mossa usata dall'attaccante
+if (canAct && rpgBattle.chosenMoveIndex !== null) {
+    const move = attackerCharDB.moves[rpgBattle.chosenMoveIndex];
+    if (isAttackerP1) {
+        rpgBattle.p1_lastMoveName = move.name;
+    } else {
+        rpgBattle.p2_lastMoveName = move.name;
+    }
+}
 updates['arenaState.rpgBattle'] = rpgBattle;
 await updateDoc(doc(db, `artifacts/${appId}/public/data/battaglia-royale`, globalState.gameId), updates);
 }
