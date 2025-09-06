@@ -325,7 +325,13 @@ let charactersDB = [
         { id: 114, name: "Victoream", img: "https://cfm.yidio.com/images/tv/26379/646955/episode-image-400x225.jpg", stats: { hp: 85, atk: 10, def: 8, spd: 7 }, isNew: true, moves: [{name: "Maguru Yo-Yo", power: 0, damage: [8, 8], effect: 'vortex', effectChance: 1.0, effectDuration: [5, 5], effectDamage: [6, 8], description: "Colpisce col suo yo-yo, infliggendo 8 danni e intrappolando il nemico per 5 turni."}, {name: "Chaguru", power: 0, damage: [5, 5], description: "Un debole raggio dalla sua bocca."}, {name: "Chàguru Imisudon", power: 0, damage: [10, 10], effect: 'special_conditional_damage_v', description: "Infligge 10 danni. Il danno raddoppia se l'ultima mossa usata è stata 'Chaguru'."}] },
         { id: 111, name: "Wario", img: "https://i.pinimg.com/736x/07/72/16/07721681614a459938a7f85ec450f957.jpg", stats: { hp: 105, atk: 11, def: 10, spd: 5 }, isNew: true, moves: [{name: "Pugno Potente", power: 0, damage: [14, 14], description: "Un pugno devastante che infligge 14 danni."}, {name: "Sonnellino d'Aglio", power: 0, effect: 'heal_percent', healPercent: 0.8, uses: 1, description: "Recupera l'80% degli HP massimi e diventa invulnerabile per i prossimi 2 turni (1 uso)."}, {name: "Alito Fetido", power: 0, effect: 'sleep', effectChance: 1.0, effectDuration: [2, 2], uses: 2, description: "Addormenta il nemico per 2 turni (max 2 usi)."}] },
         { id: 121, name: "Stellarubia (GO!)", img: "https://i.pinimg.com/736x/60/fb/2c/60fb2cdfe446bdfd8e89ef2ba2dd863e.jpg", stats: { hp: 88, atk: 11, def: 7, spd: 11 }, isNew: true, moves: [ { name: "Gattini Ovunque!", power: 0, damage: [10, 14], effect: 'infatuation', effectChance: 0.2, description: "Infligge 10-14 danni e ha il 20% di chance di infatuare." }, { name: "Laser GO!!", power: 0, damage: [13, 13], effect: 'burn', effectChance: 0.25, description: "Infligge 13 danni e ha il 25% di chance di scottare." }, { name: "Forza Tamariana", power: 0, damage: [44, 44], effect: 'stun', effectChance: 1.0, effectDuration: [1, 1], uses: 1, description: "Infligge 44 danni e stordisce per 1 turno (max 1 uso)." }, { name: "Pipì Dance", power: 0, effect: 'stun', effectChance: 1.0, effectDuration: [1, 1], uses: 3, description: "Stordisce il nemico per 1 turno (max 3 usi)." } ] },
-        { id: 122, name: "Kratos", img: "https://i.pinimg.com/736x/d9/d4/4f/d9d44f16329a4e72b4b8e45d41d83262.jpg", stats: { hp: 115, atk: 12, def: 10, spd: 5 }, isNew: true, moves: [ { name: "Ira di Sparta", power: 1.7, description: "Kratos si avvolge nelle fiamme dell’Olimpo e scaglia una raffica di fendenti incandescenti." }, { name: "Guardia del Leviatano", power: 0, effect: 'damage_reduction', effectDuration: [2, 2], reductionPercent: 0.5, uses: 3, description: "Riduce del 50% i danni subiti per il prossimo turno e ha il 50% di possibilità di congelare chi attacca." }, { name: "Richiamo della Furia", power: 0, effect: 'atk_up', effectDuration: [4, 4], uses: 2, description: "Kratos evoca la Furia di Ares, aumentando il suo attacco per 3 turni." }, { name: "Giudizio degli Dei", power: 0, damage: [60, 60], uses: 1, effect: 'special_execute_kratos', description: "Colpo finale devastante che ignora la difesa, utilizzabile solo con HP bassi." } ] },
+        // --- BILANCIAMENTO KRATOS ---
+        { id: 122, name: "Kratos", img: "https://i.pinimg.com/736x/d9/d4/4f/d9d44f16329a4e72b4b8e45d41d83262.jpg", stats: { hp: 105, atk: 11, def: 10, spd: 6 }, isNew: true, moves: [ 
+            { name: "Ira di Sparta", power: 1.6, description: "Kratos si avvolge nelle fiamme dell’Olimpo e scaglia una raffica di fendenti incandescenti." }, 
+            { name: "Guardia del Leviatano", power: 0, effect: 'damage_reduction', effectDuration: [2, 2], reductionPercent: 0.5, uses: 3, description: "Solleva la sua ascia per ridurre del 50% i danni subiti per il prossimo turno." }, 
+            { name: "Richiamo della Furia", power: 0, effect: 'atk_up', effectDuration: [4, 4], uses: 2, description: "Kratos evoca la Furia di Ares, aumentando il suo attacco per 3 turni." }, 
+            { name: "Giudizio degli Dei", power: 0, damage: [45, 45], uses: 1, effect: 'special_execute_kratos', description: "Colpo finale devastante che infligge 45 danni che ignorano la difesa. Utilizzabile solo con HP sotto il 25%." } 
+        ] },
         { id: 123, name: "Lolly", img: "https://i.pinimg.com/736x/b4/8f/a1/b48fa13567e8137d71882e6618979443.jpg", stats: { hp: 88, atk: 10, def: 9, spd: 10 }, isNew: true, moves: [
             { name: "Soffio Congelante", power: 0, damage: [10, 10], effect: 'freeze', effectChance: 1.0, effectDuration: [1, 1], uses: 3, description: "Un soffio gelido che congela il nemico per 1 turno (max 3 usi)." },
             { name: "Comando Tattico", power: 0, effect: 'stat_up', uses: 2, description: "Analizza il campo di battaglia, aumentando il proprio ATK e DEF per 3 turni." },
@@ -343,6 +349,12 @@ let charactersDB = [
             { name: "Impatto Terrestre", power: 0, damage: [18, 18], effect: 'stun', effectChance: 0.3, effectDuration: [1, 1], description: "Colpisce il terreno con forza, infliggendo 18 danni e con il 30% di possibilità di stordire il nemico." },
             { name: "Tornado di Botte", power: 0, damage: [6, 8], hits: 3, description: "Gira su se stessa creando un vortice di pugni che colpisce 3 volte." },
             { name: "Furia Combattiva", power: 0, effect: 'atk_up', effectDuration: [3, 3], uses: 2, description: "Scatena la sua rabbia, aumentando drasticamente il suo attacco per 3 turni." }
+        ]},
+        { id: 126, name: "Rapunzel", img: "https://i.pinimg.com/736x/65/e7/25/65e725cdfbff5c4faa067bd452a1e6cd.jpg", stats: { hp: 85, atk: 9, def: 8, spd: 9 }, isNew: true, moves: [
+            { name: "Frustata Dorata", power: 0, damage: [8, 12], effect: 'stun', effectChance: 0.3, effectDuration: [1, 1], description: "Colpisce con i capelli, 30% di possibilità di stordire per 1 turno." },
+            { name: "Canto di Guarigione", power: 0, effect: 'heal', healAmount: [25, 30], uses: 3, description: "Usa la magia dei suoi capelli per curare 25-30 HP (max 3 usi)." },
+            { name: "Groviglio Protettivo", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 2, description: "Si avvolge nei capelli, diventando invulnerabile per 2 turni (max 2 usi)." },
+            { name: "Padella Vendicatrice", power: 0, damage: [40, 40], uses: 1, description: "Un colpo devastante con la sua fida padella (max 1 uso)." }
         ]},
 ];
 
@@ -989,19 +1001,6 @@ async function processTurnResolution() {
             const reduction = Math.floor(damage * defenderStatus.reductionPercent);
             damage -= reduction;
             newLog.push(`${defenderCharDB.name} è protetto dallo scudo e subisce ${reduction} danni in meno!`);
-
-            // KRATOS FREEZE LOGIC
-            if (defenderCharDB.id === 122 && (damage + reduction) > 0) { // Check if an attack actually happened
-                if (Math.random() < 0.5) { // 50% chance to freeze
-                    const freezeStatus = { type: 'freeze', duration: 2 }; 
-                    if(isAttackerP1) {
-                        rpgBattle.p1_status = freezeStatus;
-                    } else {
-                        rpgBattle.p2_status = freezeStatus;
-                    }
-                    newLog.push(`La Guardia del Leviatano congela ${attackerCharDB.name}!`);
-                }
-            }
         }
 
 
