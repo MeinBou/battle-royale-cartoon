@@ -408,45 +408,6 @@ let charactersDB = [
     { name: "Super Kamehameha", power: 0, damage: [30, 30], uses: 2, description: "Onda energetica potentissima che infligge danni enormi." },
     { name: "Sono perfetto", power: 0, effect: 'atk_up', effectDuration: [3, 3], uses: 3, description: "Aumenta l'attacco per 3 turni e ti cura di 10 hp (effetto curativo non implementato)." },
     { name: "Visione perfetta", power: 0, effect: 'stun', effectChance: 1.0, effectDuration: [2, 2], uses: 3, description: "Uno sguardo letale che impietrifica l'avversario stunnandolo per 2 turni." }
-        ]},
-        { id: 130, name: "Tenebra", img: "https://i.pinimg.com/1200x/d6/d7/83/d6d7837e0981c4cc2510d380ecdf519e.jpg", stats: { hp: 80, atk: 12, def: 6, spd: 9 }, isNew: true, moves: [
-            { name: "Risata Macabra", power: 0, effect: 'stun', effectChance: 1.0, effectDuration: [3, 3], uses: 2, description: "Stunna il nemico per 3 turni." },
-            { name: "Falce dell'oblio", power: 1.5, description: "Colpisce il nemico con la sua falce facendo danni." },
-            { name: "Ombra protettiva", power: 0, effect: 'rashield_stance', effectDuration: [2, 2], uses: 4, description: "Evoca uno scudo e riflette all'avversario i danni subiti." },
-            { name: "Contratto infernale", power: 0, effect: 'atk_up', recoilAmount: 10, effectDuration: [20, 20], uses: 1, description: "Aumenta l'attacco per 20 turni ma in compenso perde 10 hp." }
-        ]},
-        { id: 131, name: "Ted", img: "https://i.pinimg.com/736x/2a/1b/cd/2a1bcd1f68c4cea428d83225a42fc7f3.jpg", stats: { hp: 100, atk: 11, def: 8, spd: 4 }, isNew: true, moves: [
-            { name: "Lancia bottiglie", power: 1.3, effect: 'poison', effectChance: 0.5, effectDuration: [5, 5], description: "Lancia una serie di bottiglie di birra di vetro che fanno danno al nemico e hanno una chance del 50% di avvelenare per 5 turni." },
-            { name: "Riposino post-sbornia", power: 0, effect: 'heal', healAmount: [50, 50], uses: 3, description: "Cura di 50 hp Ted ma lo addormenta per 1 turno (effetto sonno non implementato)." },
-            { name: "Io sono VIVO!!!", power: 0, effect: 'invulnerability', effectDuration: [2, 2], uses: 3, description: "La consapevolezza di essere vivo lo rende immune agli attacchi. Invulnerabilità per 2 turni." }
-        ]},
-        { id: 132, name: "Harley Quinn", img: "https://i.pinimg.com/736x/96/f6/79/96f679f3aef0b96235ed23dd023f164d.jpg", stats: { hp: 85, atk: 10, def: 7, spd: 11 }, isNew: true, moves: [
-            { name: "Mazzata Giocosa", power: 0, damage: [13, 13], description: "Un colpo imprevedibile che infligge sempre 13 danni." },
-            { name: "Colpo Esplosivo", power: 0, damage: [17, 17], uses: 3, description: "Un colpo più potente che infligge 17 danni." },
-            { name: "Bomba Budino", power: 0, damage: [30, 30], uses: 1, description: "Una sorpresa esplosiva che infligge 30 danni." },
-            { name: "Sorpresa Stordente", power: 0, damage: [15, 15], effect: 'stun', effectChance: 1.0, effectDuration: [1, 1], uses: 2, description: "Infligge 15 danni e stordisce il nemico per 1 turno." },
-            { name: "Risata Curativa", power: 0, effect: 'cleanse', healAmount: 10, uses: 2, description: "Si libera dagli status alterati e recupera 10 HP. (Effetto cura non implementato)" },
-            { name: "Pazza Rigenerazione", power: 0, effect: 'heal', healAmount: [27, 27], uses: 3, description: "Si cura di 27 HP." },
-            { name: "Ninna Nanna Folle", power: 0, effect: 'sleep', effectChance: 1.0, effectDuration: [2, 2], uses: 2, description: "Addormenta il nemico per 2 turni." },
-            { name: "Scherzetto Elettrico", power: 0, damage: [10, 10], effect: 'stun', effectChance: 0.15, effectDuration: [1, 1], description: "Infligge 10 danni con una probabilità del 15% di stordire." }
-        ]},
-        { id: 133, name: "Disgusto", img: "https://i.pinimg.com/736x/3c/04/b1/3c04b169f077246bebbe15a4557896f2.jpg", stats: { hp: 85, atk: 8, def: 9, spd: 10 }, isNew: true, moves: [
-            { name: "Ew, Broccoli!", power: 1.2, effect: 'poison', effectChance: 0.6, effectDuration: [3, 3], description: "Lancia broccoli disgustosi che possono avvelenare il nemico." },
-            { name: "Giudizio Sprezzante", power: 1.0, effect: 'def_down', description: "Un'occhiataccia che riduce la difesa dell'avversario." },
-            { name: "Sfera di Memoria Tossica", power: 0, damage: [15, 15], uses: 3, description: "Lancia un ricordo sgradevole che infligge 15 danni." },
-            { name: "Salva la Faccia", power: 0, effect: 'invulnerability', effectDuration: [1, 1], uses: 3, description: "Evita il prossimo attacco per non rovinarsi il look." }
-        ]},
-        { id: 134, name: "Edna", img: "https://i.pinimg.com/736x/04/02/3c/04023ce1f4c71fa3d0b18118753f5d13.jpg", stats: { hp: 75, atk: 11, def: 6, spd: 11 }, isNew: true, moves: [
-            { name: "Niente Mantelli!", power: 1.4, description: "Un colpo critico che smaschera le debolezze del nemico." },
-            { name: "Design Geniale", power: 0, effect: 'stat_up', uses: 2, description: "Crea un potenziamento istantaneo che aumenta ATK e SPD." },
-            { name: "Sistema di Sicurezza", power: 0, damage: [10, 10], effect: 'vortex', effectChance: 1.0, effectDuration: [3, 3], effectDamage: [5, 5], description: "Attiva una trappola laser che infligge 10 danni e intrappola il nemico per 3 turni." },
-            { name: "Puntaspilli Esplosivo", power: 0, damage: [25, 25], uses: 2, description: "Lancia un puntaspilli high-tech che esplode all'impatto." }
-        ]},
-        { id: 135, name: "Sid", img: "https://i.pinimg.com/736x/03/af/93/03af933e9b0f257ab8fb09b5697766a6.jpg", stats: { hp: 110, atk: 7, def: 6, spd: 5 }, isNew: true, moves: [
-            { name: "Inciampo Fortunato", power: 1.1, effect: 'stun', effectChance: 0.2, description: "Inciampa sull'avversario, infliggendo danno e con una piccola possibilità di stordirlo." },
-            { name: "Sopravvivenza del Bradipo", power: 0, effect: 'heal_percent', healPercent: 0.30, uses: 3, description: "Si rannicchia e recupera il 30% degli HP massimi." },
-            { name: "Lancio del Dente di Leone", power: 0, effect: 'sleep', effectChance: 0.7, effectDuration: [2, 3], uses: 2, description: "Soffia un dente di leone che può far addormentare il nemico." },
-            { name: "Valanga Accidentale", power: 1.7, recoilAmount: 15, description: "Provoca una valanga che infligge danni ingenti, ma ne subisce anche lui." }
         ]}
 ];
 
