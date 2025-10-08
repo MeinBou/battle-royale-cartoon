@@ -203,6 +203,19 @@ let charactersDB = [
             ]
         },
         { id: 115, name: "Bayonetta", img: "https://i.pinimg.com/736x/8e/1e/cc/8e1eccca6c1a-b76fbc2e0a5a055f327.jpg", stats: { hp: 75, atk: 11, def: 7, spd: 12 }, moves: [{name: "Witch Twist", power: 0, damage: [5, 5], effect: 'special_ramping_damage', description: "Danneggia per 5. Il danno aumenta di 5 ad ogni uso consecutivo (max 30). Si resetta se si è bloccati."}, {name: "Pipistrelli d'ombra", power: 0, effect: 'invulnerability', effectDuration: [3, 3], uses: 3, description: "Si dissolve in pipistrelli, diventando invulnerabile per 3 turni."}, {name: "Scivolata infernale", power: 0, damage: [8, 12], description: "Una rapida scivolata che infligge 8-12 danni."}] },
+        {
+            id: 148,
+            name: "Beast Boy",
+            img: "https://i.pinimg.com/736x/2a/39/e3/2a39e38d8df7c350b92e5977a1a9e34e.jpg",
+            stats: { hp: 88, atk: 10, def: 8, spd: 9 },
+            isNew: true,
+            moves: [
+                { name: "Mutaforma", power: 0, damage: [15, 15], effect: 'random_status', effectChance: 0.15, effectDuration: [2, 2], description: "Si trasforma in un animale potente infliggendo 15 di danno e ha il 15% di chance di dare uno status casuale al nemico per 2 turni." },
+                { name: "Beatbox Bestiale", power: 0, damage: [13, 13], effect: 'sleep', effectChance: 0.7, effectDuration: [1, 1], description: "Bibi fa un beatbox molto noioso infliggendo 13 di danno e con una chance del 70% di addormentare il nemico per un turno." },
+                { name: "Pipì Dance", power: 0, effect: 'stun', effectChance: 1.0, effectDuration: [1, 1], uses: 3, description: "Stordisce il nemico per 1 turno (max 3 usi)." },
+                { name: "Pizza e Videogiochi", power: 0, effect: 'heal', healAmount: [14, 30], uses: 3, description: "Bibi si rilassa curandosi dai 14 ai 30 hp (max 3 utilizzi)." }
+            ]
+        },
         { id: 112, name: "Belgim E.O", img: "https://m.media-amazon.com/images/M/MV5BODhhYWMxNzMtZGY2NS00MmM1LWI5OWItZjU1N2ZiNDA5NTI1XkEyXkFqcGc@._V1_.jpg", stats: { hp: 90, atk: 12, def: 6, spd: 8 }, moves: [{name: "Gigano Ryusu", power: 0, damage: [13, 18], description: "Una sfera con facce spettrali vorticose viene rilasciata dalla bocca."}, {name: "Erumu Ryuga", power: 0, damage: [5, 10], effect: 'burn', effectChance: 1.0, effectDuration: [3, 4], effectDamage: [4, 6], description: "Dalla bocca escono fiamme che infliggono 5 danni e scottano il nemico."}, {name: "Dioga Ryusudon", power: 0, damage: [40, 40], uses: 1, description: "Un'enorme e distruttiva sfera spettrale (max 1 uso)."}] },
         { id: 86, name: "Bender", img: "https://i.pinimg.com/736x/17/e2/65/17e2654def74fcc7137d202fb48f7c9a.jpg", stats: { hp: 95, atk: 11, def: 11, spd: 4 }, moves: [{name: "Bending", power: 1.3, description: "Piega una trave d'acciaio sull'avversario."}, {name: "Alito di Fuoco Alcolico", power: 1.4, effect: 'burn', effectChance: 0.5, effectDuration: [3, 4], effectDamage: [4, 7], description: "Un rutto infuocato che può scottare il nemico."}, {name: "Mordimi il posteriore!", power: 1.0, effect: 'def_down', description: "Un insulto che diminuisce la difesa nemica."}] },
         { id: 39, name: "Ben 10 (teen)", img: "https://i.pinimg.com/736x/ad/5c/cd/ad5ccdba073abda30c152f7eac48447b.jpg", stats: { hp: 90, atk: 10, def: 9, spd: 9 }, moves: [{name: "Trasformazione Aliena", power: 1.5, description: "Si trasforma in un alieno per un attacco a sorpresa."}, {name: "Vulkanus", power: 0, damage: [14, 14], effect: 'burn', effectChance: 1.0, effectDuration: [3, 4], description: "Lancia un getto di magma che infligge 14 danni e brucia il nemico."}, {name: "Potere Omnitrix", power: 0, effect: 'freeze', effectChance: 1.0, effectDuration: [3, 3], uses: 3, description: "Congela il nemico per 3 turni."}] },
@@ -283,6 +296,7 @@ let charactersDB = [
             name: "Fiore",
             img: "https://i.pinimg.com/736x/68/af/9d/68af9d02e5917aec2649f4efc32fad75.jpg",
             stats: { hp: 92, atk: 9, def: 10, spd: 6 },
+            isNew: true,
             moves: [
                 { name: "Polline Rovente", power: 1.6, effect: 'burn', effectChance: 0.10, description: "Lancia una raffica di polline incandescente. Ha il 10% di possibilità di scottare il nemico." },
                 { name: "Abbraccio Floreale", power: 0, effect: 'heal', healAmount: [44, 44], uses: 2, description: "Fiore si avvolge nei suoi petali per recuperare 44 HP (max 2 usi)." },
@@ -446,6 +460,7 @@ let charactersDB = [
             name: "Ricardio",
             img: "https://i.pinimg.com/1200x/92/0b/4f/920b4fb608d2c61ff96d90d6ab648cd0.jpg",
             stats: { hp: 85, atk: 10, def: 7, spd: 10 },
+            isNew: true,
             moves: [
                 { name: "Tocco Vitale", power: 0, damage: [9, 9], effect: 'lifesteal', healAmount: 9, uses: 5, description: "Ricardio ruba l'energia vitale, infliggendo 9 danni e curandosi di 9 HP." },
                 { name: "Affondo Agghiacciante", power: 0, damage: [10, 15], description: "Un attacco diretto e inquietante che infligge 10-15 danni." },
@@ -560,6 +575,8 @@ let charactersDB = [
         { id: 35, name: "Zatch Bell", img: "https://i.pinimg.com/1200x/35/9c/9e/359c9e3e0530e20c95754847066e8167.jpg", stats: { hp: 85, atk: 11, def: 7, spd: 8 }, moves: [{name: "Zaker", power: 1.3, description: "Un fulmine che esce dalla bocca."}, {name: "Rashield", power: 0, effect: 'rashield_stance', effectDuration: [2, 2], uses: 3, description: "Crea uno scudo che respinge il prossimo attacco e i suoi effetti."}, {name: "Zakeruga", power: 1.6, description: "Un raggio di fulmini concentrato e potente."}, {name: "Baou Zakeruga", power: 0, damage: [30, 30], uses: 1, description: "Un enorme drago elettrico dal potere immenso."}] },
         { id: 72, name: "Zuko", img: "https://i.pinimg.com/736x/f3/ac/60/f3ac60495d1922cc97723975473b7c8d.jpg", stats: { hp: 90, atk: 11, def: 8, spd: 9 }, moves: [{name: "Dominio del Fuoco", power: 1.4, effect: 'burn', effectChance: 0.4, effectDuration: [3, 4], effectDamage: [3, 6], description: "Un attacco con le fiamme che può scottare."}, {name: "Spade Doppie", power: 1.3, description: "Un rapido attacco con le sue spade."}, {name: "Redirezione Fulmine", power: 1.6, effect: 'counter', description: "Rispedisce al mittente un attacco energetico."}] }
 ];
+
+
 
 
 
